@@ -1,0 +1,56 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+    <h1>Error</h1>
+    <p th:text="${errorMessage}"></p>
+</body>
+</html>
+ -->
+ 
+ <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <!-- Link to your CSS file for styling -->
+    <link rel="stylesheet" href="/path/to/styles.css">
+    <style>
+    /* styles.css */
+.error-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.error-heading {
+    font-size: 48px;
+    color: #FF0000; /* Red color for the heading */
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 24px;
+    color: #333333; /* Dark color for the message */
+    margin-bottom: 30px;
+}
+
+.back-link {
+    font-size: 18px;
+    color: #007BFF; /* Blue color for the link */
+    text-decoration: none;
+}
+    
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-heading">Oops!</h1>
+        <p class="error-message" th:text="${errorMessage}"></p>
+        <a href="/" class="back-link">Go Back to Home</a>
+    </div>
+</body>
+</html>
+ 

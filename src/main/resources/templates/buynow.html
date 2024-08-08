@@ -1,0 +1,505 @@
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Address</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    
+</head>
+<body>
+
+									<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top" style="background-color:lightskyblue; color: black;">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<a href="/"><img src="/images/mymartlogo/mymart-logo.png" alt="---" height="50" width="50" style="margin-right: 10px; align-items: self-start"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<script>
+  $(document).ready(function(){
+	    // Hide all dropdown menus initially
+	    $('.dropdown-menu').hide();
+	    
+	    // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+	    $('.nav-link.dropdown-toggle').hover(function(){
+	        $('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+	    $('.dropdown-item.dropdown-toggle').hover(function(){
+	        $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // Hide dropdown menus when mouse is not hovering over any dropdown
+	    $('.dropdown').mouseleave(function() {
+	        $('.dropdown-menu').hide();
+	    });
+	});
+</script>
+
+
+		
+	<div class="collapse navbar-collapse " id="navbarNavDropdown">
+	<ul class="navbar-nav ">
+	<li class="nav-item" th:each="navbarItem : ${navbarWithDropdownData}">
+	<div class="dropdown">
+	<a th:if="${#lists.isEmpty(navbarItem.value)}" class="nav-link text-dark" th:href="${navbarItem.key != null ? (navbarItem.key.itemName == 'Admin' ? '/Admin/' + navbarItem.key.itemName : navbarItem.key.itemName) : ''}" th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}">
+			
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  	<path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+  	<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+	</svg>
+			
+	
+	</a> <a th:if="${not #lists.isEmpty(navbarItem.value)}" class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}" style="display:none">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  	<path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+  	<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+	</svg>
+	</a>
+	
+		<!-- 
+	
+	
+	 <div class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: midnightblue";>
+	<div th:each="dropdownItem : ${navbarItem.value}">
+	
+	<div class="dropdown-submenu" style="background-color: midnightblue;">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropdownItem.itemName == 'Admin' ? '/Admin/' + dropdownItem.itemName : '/User/' + dropdownItem.itemName}" th:text="${dropdownItem.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color:midnightblue;">
+	<div th:each="dropChild : ${dropdownItem.dropChildren}">
+	
+	<div class="dropdown-submenu" style="background-color: midnightblue;">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChild.itemName == 'Admin' ? '/Admin/' + dropChild.itemName : '/User/' + dropChild.itemName}" th:text="${dropChild.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color: midnightblue;">
+	<div th:each="dropChildOfChild : ${dropChild.dropChildrenOfChild}">
+	<div class="dropdown-submenu">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChildOfChild.itemName == 'Admin' ? '/Admin/' + dropChildOfChild.itemName : '/User/' + dropChildOfChild.itemName}" th:text="${dropChildOfChild.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color: midnightblue;">
+	<a class="dropdown-item" th:each="grandChild : ${dropChildOfChild.grandChildren}" th:href="${grandChild.itemName == 'Admin' ? '/Admin/' + grandChild.itemName : '/User/' + grandChild.itemName}" th:text="${grandChild.itemName}"></a>
+	</div>
+	</div>
+	</div>
+	 -->
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div> 
+	</div>
+	</li>
+	</ul>
+	</div>
+
+
+
+<!-- Search Bar  -->
+
+
+<form class="form-inline my-2 my-lg-0" id="labnol" action="/search" method="get">
+	<input class="form-control mr-sm-1" type="search" id="transcript" name="query" placeholder="Search" aria-label="Search" style="width: 220px;">
+	<svg onclick="startDictation(),play()" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16" style="color: black;">
+    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"/>
+    </svg>
+    <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+<!-- Mic JavaScript -->
+
+
+<script>
+    function startDictation() {
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript.trim(); 
+                transcript = transcript.replace('.', ''); 
+                document.getElementById('transcript').value = transcript;
+                recognition.stop();
+                document.getElementById('labnol').submit();
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+        } else {
+            console.error('Speech recognition not supported in this browser.');
+        }
+    }
+    <!-- beep sound code--->
+    function play() { 
+        var audio = new Audio( 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+        audio.play(); 
+    } 
+</script>
+
+
+<!-- Location NavigationBar -->
+
+
+<ul class="navbar-nav ml-4">
+	<li class="nav-item dropdown">
+	<a class="nav-link text-dark" id="locationButton">
+	<i class="fas fa-map-marker-alt"style="color: red;"></i> Location
+	</a>
+	</li>
+	<div id="addressContainer"></div>
+
+<script>
+  document.getElementById('locationButton').addEventListener('click', function() {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+        .then(response => response.json())
+        .then(data => {
+          var address = data.display_name;
+          document.getElementById('addressContainer').textContent = 'Your current address: ' + address;
+          document.getElementById('addressContainer').style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching address:', error);
+        });
+    });
+  });
+</script>
+
+
+<!-- Profile -->
+
+<li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" > 
+	<span class="dropdown-icon"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red;"></i>
+	</span> <span th:text="${#authentication.principal.name}" style="color:black"></span>
+	</a>
+	
+	<div class="dropdown-menu profileDrop" aria-labelledby="navbarDropdownMenuLink" style="background-color:lightskyblue;">
+	<a class="dropdown-item first" th:href="@{/profiles(name=${#authentication.principal.name})}" style="color:black">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+	<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+	<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+    </svg>&nbsp My Profile
+    </a> 
+    
+    <a class="dropdown-item second" href="/wishlist/view" style="color:black">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+    </svg>&nbsp Wishlist</a> 
+    
+    <a class="dropdown-item third" href="/cart" style="color:black"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+	<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+    </svg>&nbsp Cart
+	</a> 
+	
+	<a class="dropdown-item fourth" href="/orders" style="color:black"> 
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+    </svg>&nbsp My Orders
+	</a> 
+	
+	 <a class="dropdown-item fifth" href="/logout" style="color:black">
+	 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+     </svg> &nbsp Logout
+	</a>
+	</div>
+</li>
+
+<!-- cart -->		
+			
+<li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link text-dark " href="/login/profile/" role="button" aria-haspopup="true" aria-expanded="false"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red"></i> Login
+	</a>
+	<li class="nav-item"><a class="nav-link text-dark" href="/cart">
+	<i class="fas fa-shopping-cart fa-lg" style="color: red"></i> Cart
+	</a>
+</li>
+
+<!--<li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+    <a class="nav-link text-dark" th:href="@{/logout}">
+     <i class="fas fa-sign-out-alt fa-lg" style="color: #007bff;"></i> Logout
+    </a>
+</li>  -->
+	
+</ul>
+</div>
+</nav> <br>
+
+
+<h1 class="text-center">Checkout</h1>
+
+<div class="container" style="display:flex;">
+
+    <form id="msform"  method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <ul class="list-group">
+                    <ul class="list-group">
+                        <th:block th:each="product : ${product}">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img th:src="@{'/images/' + ${product.imageFileName}}" class="img-fluid" alt="Product Image">
+                                    </div>
+                                    <div class="col-9">
+                                        <h6 class="card-subtitle mb-2 text-muted" th:text="${product.name}"></h6>
+                                        <p class="card-text">
+                                            Brand: <span th:text="${product.brand}"></span><br>
+                                            <!--                        Price: $<span th:text="${cartItem.product.price}"></span><br>
+                                            -->
+
+
+                                        <p class="card-text">
+                                            <!-- Check if the product has a deal -->
+                                            <span th:if="${product.deal != null}">
+        Discounted Price: ₹ <span th:text="${product.discountedPrice}"></span>
+    </span>
+                                            <!-- If the product does not have a deal, display the original price -->
+                                            <span th:unless="${product.deal != null}">
+        Price: ₹ <span th:text="${product.price}"></span>
+    </span>
+                                        </p>
+
+
+
+
+<!--                                        Quantity: <span th:text="${product.quantity}"></span> Qty-->
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </th:block>
+                    </ul>
+            </div>
+
+
+            <h4> Order Summery</h4>
+            <h6>ProductValue: ₹ <span th:text="${product.price}"></span></h6>
+            <h6>Shipping Charges: ₹ <span th:text="${shipping}"></span></h6>
+            <h6>Total Amount: ₹ <span  th:text="${finalprice}"></span></h6>
+    </form>
+</div><br>
+<!--<form id="msform" action="/buynowpayment" method="get">-->
+<!--    <select name="addressId" required>-->
+<!--        <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country +',' +address.zipCode}"></option>-->
+<!--    </select>-->
+
+
+<!--    <a href="/addAddress" class="btn btn-secondary">Add New Address</a>-->
+
+
+
+
+
+
+
+
+
+
+<form id="msform" action="/buynowpayment" method="get" style="margin-left:30px;">
+<h3>Select Shipping Address</h3>
+    <div class="address-box">
+        <th:block th:each="address : ${addresses}">
+            <label> <input type="radio" name="addressId" th:value="${address.id}" required> <b> <span th:text="${address.name + ' - ' + address.mobile}"></span></b> <br>
+                <span th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country +', ' +address.zipCode}"></span>
+            </label>
+            <a th:href="@{'/editAddress/' + ${address.id}}"> <i class="fas fa-edit"></i></a>
+            <a th:href="@{'/deleteAddress/' + ${address.id}}" style="color: red;"> <i class="fas fa-trash-alt"></i></a>
+            <br><br>
+        </th:block>
+    </div>
+    <a href="/addAddress" class="btn btn-primary btn-block">Add New Address</a>
+    
+    <button th:each="product : ${product}" name="productId" th:value="${product.id}" type="submit" class="btn btn-block mt-3" style="background-color:#FF4500;">Proceed to Payment</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <br><br>-->
+<!--    <a type="button" th:href="@{/buynowpayment(id=${product.id})}" class="btn btn-primary" >Proceed to Payment</a>-->
+<!--</form>-->
+
+
+<!--  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<!-- razorpay -->
+
+
+<script type="text/javascript">
+    function doPost(path, requestObject, isAsync) {
+        var resp;
+        $.ajax({
+            url : path,
+            type : 'POST',
+            data : requestObject,
+            contentType : "application/json; charset=UTF-8",
+            async : isAsync,
+            success : function(data) {
+                resp = JSON.parse(data)
+            }
+        })
+        return resp;
+    }
+</script>
+
+<script>
+    var resp = null;
+
+    /**
+        Manual Checkout for Razor Pay
+     **/
+
+     var options = {
+        "key" : "",
+        "amount" : "",
+        "name" : "",
+        "description" : "",
+        "image" : "",
+        "order_id" : "",
+        "handler" : function(response) {
+            alert(response.razorpay_payment_id);
+            $('#msform')[0].reset();
+            $('#pay-success').show();
+
+        },
+        "prefill" : {
+            "name" : "",
+            "email" : ""
+        },
+        "notes" : {
+            "address" : ""
+        },
+        "theme" : {
+            "color" : ""
+        },
+         "method": {
+                "upi": true, // Enable BHIM UPI
+                "wallet": true, // Enable wallets (Google Pay, PhonePe, etc.)
+                "card": true // Enable card payments
+        }
+    };
+
+    function setAmountToTotal() {
+        var total = document.getElementById('total').value;
+        document.getElementById('amount').value = total;
+    }
+
+    window.onload = function() {
+        setAmountToTotal();
+    };
+
+    document.getElementById('rzp-button1').onclick = function(e) {
+
+         var requiredFields = ['customerName', 'email', 'phoneNumber', 'localAddress', 'permanentAddress', 'amount'];
+            for (var i = 0; i < requiredFields.length; i++) {
+                var field = requiredFields[i];
+                if (!document.getElementById(field).value) {
+                    alert("Please fill in all required fields.");
+                    return;
+                }
+            }
+
+        setAmountToTotal();
+
+        var reqObject = $('#msform').serializeArray();
+        var indexedReqObj = {};
+        $.map(reqObject, function(n, i) {
+            indexedReqObj[n['name']] = n['value'];
+        });
+
+        $.ajax({
+            url : "/storeFormData",
+            type : "POST",
+            contentType : "application/json",
+            data : JSON.stringify(indexedReqObj),
+            success : function(response) {
+                // Handle success response if needed
+                console.log("Form data stored successfully");
+            },
+            error : function(xhr, status, error) {
+                // Handle error response if needed
+                console.error("Error storing form data: " + error);
+            }
+        });
+
+        resp = doPost("/createPayment", JSON.stringify(indexedReqObj),
+                false);
+        if (resp.statusCode == 200) {
+            options.key = resp.razorPay.secretKey;
+            options.order_id = resp.razorPay.razorpayOrderId;
+            options.amount = resp.razorPay.applicationFee; //paise
+            options.name = resp.razorPay.merchantName;
+            options.description = resp.razorPay.purchaseDescription;
+            options.image = resp.razorPay.imageURL;
+            options.prefill.name = resp.razorPay.customerName;
+            options.prefill.email = resp.razorPay.customerEmail;
+            options.notes.address = resp.razorPay.notes;
+            options.theme.color = resp.razorPay.theme;
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        } else {
+            //do something else
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,747 @@
+<!--
+
+  <html>
+<head>
+
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+
+<style>
+
+ body {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark gray text */
+            margin-top: 50px; /* Add margin from the top */
+        }
+        .card {
+            border: none;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            margin-bottom: 20px; /* Add space between cards */
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff; /* Blue primary button */
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            border-color: #0056b3;
+        }
+        .form-check {
+            margin-bottom: 10px; /* Add space between form-check elements */
+        }
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px; /* Add margin to separate from other elements */
+        }
+        .title-container h1 {
+            font-size: 36px;
+            color: red; /* Blue color for the title */
+            margin-bottom: 10px; /* Adjust margin below the title */
+        }
+        #pay-success {
+            margin-top: 20px; /* Add space above the success alert */
+        }
+        .form-group {
+            margin-bottom: 20px; /* Add space below form-group elements */
+        }
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .left-content,
+        .right-content {
+            width: 48%; /* Adjust width as needed */
+        }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container body">
+        <div class="main_container">
+        <div class="title-container">
+                <h1><strong><u>Payment Checkout</u></strong></h1>
+            </div>
+
+
+
+
+            <div class="alert alert-success" id="pay-success"
+                style="display: none;">
+                <strong>Payment Successfull</strong>
+            </div>
+
+            <form id="msform">
+
+
+ <div class="content-container">
+                    <div class="left-content">
+<div class="card mt-4">
+            <div class="card-body">
+                <h3 class="card-title text-primary"><u>User Information:</u></h3>
+                <b><p class="card-text" th:text="${selectedAddress.name}"></p></b>
+                <p class="card-text" th:text="${selectedAddress.mobile}"></p>
+              <p class="card-text" th:text="${selectedAddress.addressLine1}"></p>
+                <p class="card-text" th:text="${selectedAddress.city + ', ' + selectedAddress.state}"></p>
+                <p class="card-text" th:text="${selectedAddress.country + ', ' + selectedAddress.zipCode}"></p>
+            </div>
+        </div>
+ </div>
+        <div class="right-content">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3 class="card-title text-primary"><u>Total Amount:</u></h3>
+                <p class="card-text " th:text="${totala}"></p>
+
+
+
+                <div class="form-group  ">
+                    <label for="amount"></label> <input class="text-success font-weight-bold" id="amount"
+                                        name="amount" placeholder="Amount" style="width: 120px;"
+                                        readonly>
+                                </div>
+
+
+                <input type="hidden" id="subtotal" name="subtotal"
+                    th:value="${subtotal}"> <input type="hidden" id="shipping"
+                    name="shipping" th:value="${shipping}"> <input
+                    type="hidden" id="total" name="total" th:value="${total}">
+                    <input type="hidden" id="orderNumber" name="orderNumber">
+  <input type="hidden" id="paymentTransactionId" name="paymentTransactionId" >
+
+
+</div>
+</div>
+
+
+
+<br>
+ <h4> Pay Online</h4>
+
+                <button type="button" class="btn btn-block mt-3 " id="rzp-button1"
+                    style="margin-top: -2px; background-color:#FF4500;">Pay Online</button>
+                    <br><br>
+
+
+
+
+<h4> Cash on delivery</h4>
+
+
+
+
+
+</form>
+        <form action="/placeOrder/COD" method="post">
+    <input type="hidden" id="addressId" name="addressId" th:value="${selectedAddress.id}">
+
+  <button type="submit" class="btn btn-primary btn-block mt-3 ">Place Order</button>
+</form>
+
+            </form>
+</div>
+</div>
+        </div>
+    </div>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+
+    <script type="text/javascript">
+
+
+
+
+        function doPost(path, requestObject, isAsync) {
+            var resp;
+            $.ajax({
+                url : path,
+                type : 'POST',
+                data : requestObject,
+                contentType : "application/json; charset=UTF-8",
+                async : isAsync,
+                success : function(data) {
+                    resp = JSON.parse(data)
+                }
+            })
+            return resp;
+        }
+    </script>
+
+    <script>
+        var resp = null;
+
+
+
+        var options = {
+            "key" : "",
+            "amount" : "",
+            "name" : "",
+            "description" : "",
+            "image" : "",
+            "order_id" : "",
+            "handler" : function(response) {
+
+            	alert("Your Payment is Successfull");
+                $('#msform')[0].reset();
+                $('#pay-success').show();
+
+
+                var addressId = document.getElementById('addressId').value;
+                var paymentId = response.razorpay_payment_id;
+                var orderId = response.razorpay_order_id;
+
+                setTimeout(function () {
+                    var form = document.createElement('form');
+                    form.method = 'POST';
+                    form.action = '/placeOrder/Online';
+
+                    var addressInput = document.createElement('input');
+                    addressInput.type = 'hidden';
+                    addressInput.name = 'addressId';
+                    addressInput.value = addressId;
+                    form.appendChild(addressInput);
+
+                    var paymentInput = document.createElement('input');
+                    paymentInput.type = 'hidden';
+                    paymentInput.name = 'paymentId';
+                    paymentInput.value = paymentId;
+                    form.appendChild(paymentInput);
+
+                    var orderInput = document.createElement('input');
+                    orderInput.type = 'hidden';
+                    orderInput.name = 'orderId';
+                    orderInput.value = orderId;
+                    form.appendChild(orderInput);
+
+                    document.body.appendChild(form);
+                    form.submit();
+                }, 1000);
+
+
+            },
+            "prefill" : {
+                "name" : "",
+                "email" : ""
+            },
+            "notes" : {
+                "address" : ""
+            },
+            "theme" : {
+                "color" : ""
+            },
+             "method": {
+                    "upi": true,
+                    "wallet": true,
+                    "card": true
+            }
+        };
+
+
+
+
+
+
+        function setAmountToTotal() {
+            var subtotal = parseFloat(document.getElementById('subtotal').value);
+            var totalElement = document.getElementById('amount');
+
+            if (subtotal === 0) {
+                totalElement.value = 0; // Set amount to zero if subtotal is zero
+            } else {
+                var total = document.getElementById('total').value;
+                totalElement.value = total;
+            }
+        }
+
+
+        window.onload = function() {
+            setAmountToTotal();
+        };
+
+        document.getElementById('rzp-button1').onclick = function(e) {
+
+
+             var requiredFields = [];
+                for (var i = 0; i < requiredFields.length; i++) {
+                    var field = requiredFields[i];
+                    if (!document.getElementById(field).value) {
+                        alert("Please fill in all required fields.");
+                        return;
+                    }
+                }
+                var subtotal = parseFloat(document.getElementById('subtotal').value);
+                if (subtotal === 0) {
+                    alert("Product not added. Please add products to proceed with payment.");
+                    // Set total to zero
+                    document.getElementById('total').value = 0;
+                    return;
+                }
+
+            setAmountToTotal();
+
+            var reqObject = $('#msform').serializeArray();
+            var indexedReqObj = {};
+            $.map(reqObject, function(n, i) {
+                indexedReqObj[n['name']] = n['value'];
+            });
+
+
+
+
+
+              $.ajax({
+                url: "/storeFormData/",
+                type : "POST",
+                contentType: "application/json",
+                data: JSON.stringify(indexedReqObj),
+                success : function(response) {
+                    console.log("Form data stored successfully");
+                },
+                error : function(xhr, status, error) {
+                    console.error("Error storing form data: " + error);
+                }
+            });
+
+
+
+
+
+            resp = doPost("/createPayment", JSON.stringify(indexedReqObj),
+                    false);
+            if (resp.statusCode == 200) {
+                options.key = resp.razorPay.secretKey;
+                options.order_id = resp.razorPay.razorpayOrderId;
+                options.amount = resp.razorPay.applicationFee;
+                options.name = resp.razorPay.merchantName;
+                options.description = resp.razorPay.purchaseDescription;
+                options.image = resp.razorPay.imageURL;
+                options.prefill.name = resp.razorPay.customerName;
+                options.prefill.email = resp.razorPay.customerEmail;
+                options.notes.address = resp.razorPay.notes;
+                options.theme.color = resp.razorPay.theme;
+
+				 indexedReqObj['orderId'] = resp.razorPay.razorpayOrderId;
+
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                e.preventDefault();
+            } else {
+            }
+        }
+    </script>
+
+
+</body>
+</html>
+
+   -->
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <style>
+
+        body {
+                   background-color: #f8f9fa; /* Light gray background */
+                   color: #343a40; /* Dark gray text */
+                   margin-top: 50px; /* Add margin from the top */
+               }
+               .card {
+                   border: none;
+
+                   margin-bottom: 20px; /* Add space between cards */
+
+               }
+               .card-body {
+                   padding: 20px;
+                  background-color: #D60AC1;
+                   border-radius: 25px 80px;
+                   box-shadow: 10px 10px;
+               }
+               .btn-primary {
+                   background-color: #007bff; /* Blue primary button */
+                   border-color: #007bff;
+               }
+               .btn-primary:hover {
+                   background-color: #0056b3; /* Darker blue on hover */
+                   border-color: #0056b3;
+               }
+               .form-check {
+                   margin-bottom: 10px; /* Add space between form-check elements */
+               }
+               .title-container {
+                   text-align: center;
+                  /* Add margin to separate from other elements */
+                   margin-bottom: 30px;
+
+               }
+               .title-container h1 {
+                   font-size: 36px;
+                   color: red; /* Blue color for the title */
+                   margin-bottom: 10px; /* Adjust margin below the title */
+               }
+               #pay-success {
+                   margin-top: 20px; /* Add space above the success alert */
+               }
+               .form-group {
+                   margin-bottom: 20px; /* Add space below form-group elements */
+               }
+               .content-container {
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: flex-start;
+
+               }
+               .container{
+               color:#000000;
+               border-radius: 15px 15px;
+               }
+               .left-content,
+               .right-content {
+                   width: 48%; /* Adjust width as needed */
+
+                    background:transparent;
+
+
+               }
+               .btn-container {
+                   display: flex;
+                   flex-direction: column;
+                   justify-content: space-between;
+               }
+               body{
+
+
+               }
+    </style>
+
+
+</head>
+
+<body >
+<div class="container body">
+    <div class="main_container">
+        <div class="title-container">
+            <h1 style="color:black;"><strong><u>Payment Checkout</u></strong></h1>
+        </div>
+
+
+
+
+        <div class="alert alert-success" id="pay-success"
+             style="display: none;">
+            <strong>Payment Successfull</strong>
+        </div>
+
+        <form id="msform">
+
+
+            <div class="content-container">
+                <div class="left-content">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h3 class="card-title" Style="color:white;"><u>User Information:</u></h3>
+                            <div class="container  " style="border:solid 0.5px;">
+                                <br>
+                                <b>Name:</b><p class="card-text" th:text="${selectedAddress.name}"></p>
+                                <b>Contact No:</b><p class="card-text" th:text="${selectedAddress.mobile}"></p>
+                                <b> Address:</b><p class="card-text" th:text="${selectedAddress.addressLine1}"></p>
+                                <b> City,State:</b><p class="card-text" th:text="${selectedAddress.city + ', ' + selectedAddress.state}"></p>
+                                <b>Country,ZIP:</b><p class="card-text" th:text="${selectedAddress.country + ', ' + selectedAddress.zipCode}"></p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-content">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h3 class="card-title "  Style="color:white;"><u>Total Amount:</u></h3>
+
+
+
+
+                            <div class="form-group  " >
+                                <label for="amount"></label> <input class="text-success font-weight-bold" id="amount"
+                                                                    name="amount" placeholder="Amount" style="width: 120px; background: black;color:white;"
+                                                                    readonly>
+                            </div>
+
+
+                           <input type="hidden" id="subtotal1" name="subtotal1"
+                                   th:value="${subtotal1}"> <input type="hidden" id="shipping"
+                                                                  name="shipping" th:value="${shipping}"> <input
+                                type="hidden" id="finalprice" name="finalprice" th:value="${finalprice}">
+
+
+
+                        </div>
+                    </div>
+
+
+
+                    <br>
+                    <h4> Pay Online</h4>
+
+                    <button type="button" class="btn btn-block mt-3 " id="rzp-button1"
+                            style="margin-top: -2px; background-color:#FF4500;">Pay Online</button>
+                    <br><br>
+
+
+
+
+                    <h4> Cash on delivery</h4>
+
+
+
+
+
+        </form>
+        <form action="/orderConfirmation">
+            <input type="hidden" id="addressId" name="addressId" th:value="${selectedAddress.id}">
+
+            <button type="submit" class="btn btn-dark btn-block mt-3 ">Place Order</button>
+        </form>
+
+        </form>
+    </div>
+</div>
+</div>
+</div>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript">
+
+
+
+
+    function doPost(path, requestObject, isAsync) {
+         var resp;
+         $.ajax({
+             url : path,
+             type : 'POST',
+             data : requestObject,
+             contentType : "application/json; charset=UTF-8",
+             async : isAsync,
+             success : function(data) {
+                 resp = JSON.parse(data)
+             }
+         })
+         return resp;
+     }
+</script>
+
+<script>
+    var resp = null;
+
+
+
+    var options = {
+        "key" : "",
+        "amount" : "",
+        "name" : "",
+        "description" : "",
+        "image" : "",
+        "order_id" : "",
+        "handler" : function(response) {
+
+            alert("Your Payment is Successfull");
+            $('#msform')[0].reset();
+            $('#pay-success').show();
+
+
+            var addressId = document.getElementById('addressId').value;
+            var paymentId = response.razorpay_payment_id;
+            var orderId = response.razorpay_order_id;
+
+            setTimeout(function () {
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/placeOrder/Online';
+
+                var addressInput = document.createElement('input');
+                addressInput.type = 'hidden';
+                addressInput.name = 'addressId';
+                addressInput.value = addressId;
+                form.appendChild(addressInput);
+
+                var paymentInput = document.createElement('input');
+                paymentInput.type = 'hidden';
+                paymentInput.name = 'paymentId';
+                paymentInput.value = paymentId;
+                form.appendChild(paymentInput);
+
+                var orderInput = document.createElement('input');
+                orderInput.type = 'hidden';
+                orderInput.name = 'orderId';
+                orderInput.value = orderId;
+                form.appendChild(orderInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            }, 1000);
+
+
+        },
+        "prefill" : {
+            "name" : "",
+            "email" : ""
+        },
+        "notes" : {
+            "address" : ""
+        },
+        "theme" : {
+            "color" : ""
+        },
+         "method": {
+                "upi": true,
+                "wallet": true,
+                "card": true
+        }
+    };
+
+
+
+
+
+
+    function setAmountToTotal() {
+        var subtotal1 = parseFloat(document.getElementById('subtotal1').value);
+        var totalElement = document.getElementById('amount');
+
+        if (subtotal1 === 0) {
+            totalElement.value = 0; // Set amount to zero if subtotal is zero
+        } else {
+            var finalprice = document.getElementById('finalprice').value;
+            totalElement.value = finalprice;
+        }
+    }
+
+
+    window.onload = function() {
+        setAmountToTotal();
+    };
+
+    document.getElementById('rzp-button1').onclick = function(e) {
+
+
+         var requiredFields = [];
+            for (var i = 0; i < requiredFields.length; i++) {
+                var field = requiredFields[i];
+                if (!document.getElementById(field).value) {
+                    alert("Please fill in all required fields.");
+                    return;
+                }
+            }
+            var subtotal1 = parseFloat(document.getElementById('subtotal1').value);
+            if (subtotal1 === 0) {
+                alert("Product not added. Please add products to proceed with payment.");
+                // Set total to zero
+                document.getElementById('finalprice').value = 0;
+                return;
+            }
+
+        setAmountToTotal();
+
+        var reqObject = $('#msform').serializeArray();
+        var indexedReqObj = {};
+        $.map(reqObject, function(n, i) {
+            indexedReqObj[n['name']] = n['value'];
+        });
+
+
+
+
+
+          $.ajax({
+            url: "/storeFormData/",
+            type : "POST",
+            contentType: "application/json",
+            data: JSON.stringify(indexedReqObj),
+            success : function(response) {
+                console.log("Form data stored successfully");
+            },
+            error : function(xhr, status, error) {
+                console.error("Error storing form data: " + error);
+            }
+        });
+
+
+
+
+
+        resp = doPost("/createPayment", JSON.stringify(indexedReqObj),
+                false);
+        if (resp.statusCode == 200) {
+            options.key = resp.razorPay.secretKey;
+            options.order_id = resp.razorPay.razorpayOrderId;
+            options.amount = resp.razorPay.applicationFee;
+            options.name = resp.razorPay.merchantName;
+            options.description = resp.razorPay.purchaseDescription;
+            options.image = resp.razorPay.imageURL;
+            options.prefill.name = resp.razorPay.customerName;
+            options.prefill.email = resp.razorPay.customerEmail;
+            options.notes.address = resp.razorPay.notes;
+            options.theme.color = resp.razorPay.theme;
+
+             indexedReqObj['orderId'] = resp.razorPay.razorpayOrderId;
+
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        } else {
+        }
+    }
+</script>
+
+
+</body>
+</html>

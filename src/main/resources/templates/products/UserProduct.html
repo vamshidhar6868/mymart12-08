@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+-->
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:java8="http://www.thymeleaf.org/extras/java8">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+
+integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+
+integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+
+integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+
+integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+
+crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+
+integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+
+crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="/path/to/styles.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+
+integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<style>
+
+
+.btn-primary {
+
+background-color: #007bff;
+
+border-color: #007bff;
+
+}
+
+.btn-success {
+
+background-color: #4caf50;
+
+border-color: #4caf50;
+
+color: white;
+
+}
+
+.btn-success:hover {
+
+background-color: #0056b3;
+
+border-color: #0056b3;
+
+transform: translateY(-3px);
+
+}
+
+.btn-primary:hover {
+
+background-color: #0056b3;
+
+border-color: #0056b3;
+
+transform: translateY(-3px);
+
+}
+
+.product-card {
+
+margin-bottom: 20px;
+
+width: calc(33.33% - 20px);
+
+display: inline-block;
+
+vertical-align: top;
+
+}
+
+@media (max-width: 768px) {
+
+.product-card {
+
+width: calc(50% - 20px);
+
+}
+
+}
+
+@media (max-width: 576px) {
+
+.product-card {
+
+width: calc(100% - 20px);
+
+}
+
+}
+
+.product-card .card {
+
+height: 100%;
+
+}
+
+.card {
+
+transition: transform 0.2s;
+
+}
+
+.card:hover {
+
+transform: translateY(-5px);
+
+}
+
+.card-img-top {
+
+height: 200px;
+
+/* Adjust the height of the image */
+
+object-fit: cover;
+
+}
+
+.deal-card {
+
+margin-bottom: 30px;
+
+border: 1px solid #ddd;
+
+border-radius: 5px;
+
+overflow: hidden;
+
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+transition: transform 0.3s ease;
+
+position: relative;
+
+/* Add relative positioning for absolute positioning of wishlist icon and discount badge */
+
+}
+
+.deal-card:hover {
+
+transform: translateY(-5px);
+
+}
+
+.card-body {
+
+padding: 20px;
+
+}
+
+.card-title {
+
+font-size: 1.25rem;
+
+font-weight: bold;
+
+margin-bottom: 10px;
+
+}
+
+.card-text {
+
+margin-bottom: 10px;
+
+}
+
+.btn {
+
+width: 100%;
+
+}
+
+.heart-icon {
+
+font-size: 18px;
+
+color: #888;
+
+/* Light grey color */
+
+cursor: pointer;
+
+}
+
+.heart-icon.clicked {
+
+color: red;
+
+/* Red color when clicked */
+
+}
+
+.deal-card .btn-primary {
+
+background-color: #FFD700;
+
+/* Gold color for Add to Cart */
+
+border-color: #FFD700;
+
+color: #333;
+
+}
+
+.deal-card .btn-primary:hover {
+
+background-color: #DAA520;
+
+/* Darker gold color on hover */
+
+border-color: #DAA520;
+
+transform: translateY(-3px);
+
+}
+
+.deal-card .btn-success {
+
+background-color: #4CAF50;
+
+/* Green color for Buy Now */
+
+border-color: #4CAF50;
+
+color: white;
+
+}
+
+.deal-card .btn-success:hover {
+
+background-color: #45A049;
+
+/* Darker green color on hover */
+
+border-color: #45A049;
+
+transform: translateY(-3px);
+
+}
+
+.card {
+
+transition: transform 0.2s;
+
+background-color: white;
+
+color: #333;
+
+border: none;
+
+/* Remove border */
+
+border-radius: 10px;
+
+/* Add some border radius */
+
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+position: relative;
+
+/* Add relative positioning */
+
+}
+
+.card:hover {
+
+transform: translateY(-5px);
+
+box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+
+background-color: rgba(0, 0, 0, 0.1);
+
+color: black;
+
+border:solid 1px;
+
+border-color:#a60af2; /* Change text color to white on hover */
+
+}
+
+.card:hover .brand-name,
+
+.card:hover .price {
+
+color: black;
+/* Change brand name and old price text color to white on hover */
+
+}
+
+.original-price {
+
+color: black;
+
+}
+
+.card:hover .original-price {
+
+color: black;
+
+}
+
+.custom-button {
+
+border-radius: 0;
+
+font-weight: bold;
+
+}
+
+
+.filter-dropdown{
+
+right:400px;
+
+top:10px;
+
+}
+
+.filter-dropdown {
+
+position: fixed; /* Ensure relative positioning */
+
+z-index: 1100; /* Adjust z-index to ensure the dropdown appears above the navbar */
+
+}
+
+.dropdown-menu {
+
+position: fixed; /* Position the dropdown menu */
+
+top: 100%; /* Position below the dropdown button */
+
+z-index: 1200; /* Ensure the dropdown menu is above other elements */
+
+}
+
+.hide {
+
+display: none !important;
+
+}
+
+/* languages banned hide css */
+
+.goog-te-banner-frame {
+
+display: none !important
+
+}
+
+.skiptranslate {
+
+display: none !important
+
+}
+
+
+
+.wishlistForm {
+
+position: absolute;
+
+top: 158px;
+
+left: 295px;
+
+}
+
+.wishlistForm:hover {
+
+outline: none; /* Remove the blue outline */
+
+}
+
+
+.wishlistButton {
+
+background-color: transparent;
+
+border: none;
+
+padding: 0;
+
+
+}
+
+.wishlistIcon {
+
+color: white;
+
+font-size: 24px;
+
+
+}
+
+.wishlistIcon-container {
+
+position: relative;
+
+width: 40px;
+
+height: 40px;
+
+background-color: red;
+
+border-radius: 50%;
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+transition: background-color 0.3s;
+
+
+}
+
+.wishlistButton:hover .wishlistIcon-container {
+
+background-color: white;
+
+
+}
+
+.wishlistIcon:hover {
+
+color: red;
+
+text-decoration: none;
+
+}
+
+.wishlistIconContainer i {
+
+color: white;
+
+
+}
+
+.wishlistIconContainer:hover i {
+
+color: red;
+
+}
+
+/* Prevent button size change on hover */
+
+.custom-button {
+
+height: auto;
+
+min-height: 38px;
+
+}
+
+.hide {
+
+display: none;
+
+}
+
+.form-inline {
+
+margin-right: 100px;
+
+}
+
+.container.mt-5 {
+
+margin-top: 700px; /* Adjust this value as needed */
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top" style="background-color:lightskyblue; color: black;">
+<a href="/"><img src="/images/mymartlogo/mymart-logo.png" alt="---" height="50" width="50" style="margin-right: 10px; align-items: self-start"></a>
+
+
+
+<!-- Search Bar  -->
+
+
+<form class="form-inline my-2 my-lg-0" id="labnol" action="/search" method="get" style="margin-left: 350px;">
+	<input class="form-control mr-sm-1" type="search" id="transcript" name="query" placeholder="Search" aria-label="Search" style="width: 300px;">
+	<svg onclick="startDictation(),play()" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16" style="color: black;">
+    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"/>
+    </svg>
+    <button class="btn btn-danger my-2 my-sm-0" type="submit" style="width:100px">Search</button>
+</form>
+
+<!-- Mic JavaScript -->
+
+
+<script>
+    function startDictation() {
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript.trim(); 
+                transcript = transcript.replace('.', ''); 
+                document.getElementById('transcript').value = transcript;
+                recognition.stop();
+                document.getElementById('labnol').submit();
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+        } else {
+            console.error('Speech recognition not supported in this browser.');
+        }
+    }
+    <!-- beep sound code--->
+    function play() { 
+        var audio = new Audio( 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+        audio.play(); 
+    } 
+</script>
+
+
+<!-- Location NavigationBar -->
+
+
+<ul class="navbar-nav ml-4" style="position: absolute; left: 970px;">
+	<li class="nav-item dropdown">
+	<a class="nav-link text-dark" id="locationButton">
+	<i class="fas fa-map-marker-alt"style="color: red;"></i> Location
+	</a>
+	</li>
+	<div id="addressContainer"></div>
+
+<script>
+  document.getElementById('locationButton').addEventListener('click', function() {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+        .then(response => response.json())
+        .then(data => {
+          var address = data.display_name;
+          document.getElementById('addressContainer').textContent = 'Your current address: ' + address;
+          document.getElementById('addressContainer').style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching address:', error);
+        });
+    });
+  });
+</script>
+
+
+<!-- cart -->
+
+	<li class="nav-item"><a class="nav-link text-dark" href="/cart">
+	<i class="fas fa-shopping-cart fa-lg" style="color: red"></i> Cart
+	</a>
+</li>
+
+<!-- Profile -->
+
+<li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" > 
+	<span class="dropdown-icon"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red;"></i>
+	</span> <span th:text="${#authentication.principal.name}" style="color:black"></span>
+	</a>
+	
+	<div class="dropdown-menu profileDrop" aria-labelledby="navbarDropdownMenuLink" style="background-color:lightskyblue;">
+	<a class="dropdown-item first" th:href="@{/profiles(name=${#authentication.principal.name})}" style="color:black">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+	<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+	<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+    </svg>&nbsp My Profile
+    </a> 
+    
+    <a class="dropdown-item second" href="/wishlist/view" style="color:black">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+    </svg>&nbsp Wishlist</a> 
+    
+    <a class="dropdown-item third" href="/cart" style="color:black"> 
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+	<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+    </svg>&nbsp Cart
+	</a> 
+	
+	<a class="dropdown-item fourth" href="/orders" style="color:black"> 
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+    </svg>&nbsp My Orders
+	</a> 
+	
+	 <a class="dropdown-item fifth" href="/logout" style="color:black">
+	 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+     </svg> &nbsp Logout
+	</a>
+	</div>
+</li>
+
+<!-- cart -->		
+			
+<li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link text-dark " href="/login/profile/" role="button" aria-haspopup="true" aria-expanded="false"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red"></i> Login
+	</a>
+
+
+<!--<li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+    <a class="nav-link text-dark" th:href="@{/logout}">
+     <i class="fas fa-sign-out-alt fa-lg" style="color: #007bff;"></i> Logout
+    </a>
+</li>  -->
+	
+</ul>
+</div>
+</nav> <br>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="filter-dropdown">
+
+<div class="dropdown">
+
+<button class="btn btn-secondary dropdown-toggle" type="button" id="filterDropdown" data-toggle="dropdown"
+
+aria-haspopup="true" aria-expanded="false" style="margin-top:5px">
+
+Filter
+
+</button>
+
+<div class="dropdown-menu" aria-labelledby="filterDropdown">
+
+<a class="dropdown-item" href="#" onclick="applyFilters('Name')">Name</a>
+
+<a class="dropdown-item" href="#" onclick="applyFilters('Brand')">Brand</a>
+
+<a class="dropdown-item" href="#" onclick="applyFilters('Category')">Category</a>
+
+<a class="dropdown-item" href="#" onclick="applyFilters('Price')">Price</a>
+
+<div class="dropdown-divider"></div>
+
+<button id="resetFilter" class="btn btn-danger" onclick="resetFilters()">Reset Filter</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Row View Cards  -->
+
+
+
+<div class="container" style="margin-top: 100px;">
+
+<div class="row">
+
+<div class="col-md-4" th:each="product : ${products}" >
+
+<div class="card deal-card position-relative" style="padding: 15px 10px 10px 10px;">
+
+<div class="container" style="position: absolute; left: 300px; top: 180px;">
+	<form th:action="@{/wishlist/add}" method="post" class="wishlistForm">
+	<input type="hidden" name="productId" th:value="${product.id}">
+	<button type="submit" class="btn btn-link">
+	<span class="wishlistIcon-container">
+	<i class="wishlistIcon far fa-heart"></i>
+	</span>
+	</button>
+	</form>
+</div>
+
+<a th:href="@{/User/viewproduct(id=${product.id})}"> 
+<img th:src="@{'/images/' + ${product.imageFileName}}" class="card-img-top mb-3"
+
+alt="Product Image" style="z-index: 1; margin-top: -6px;"></a>
+
+<div class="discount-badge position-absolute top-0 end-0 bg-danger text-white px-2 py-1"
+
+th:if="${product.deal != null}" th:text="' ' + ${product.deal.discount + '% OFF'}"
+
+style="z-index: 2; right: 7px; top: 5px;">10% OFF</div>
+
+<h5 class="card-title mb-1" th:text="${product.name}"></h5>
+
+<p class="brand-name text-uppercase mb-2" th:text="${product.brand}"
+
+style="font-size: 14px;"></p>
+
+<p class="category-field mb-2" th:text="${product.category?.name}"
+
+style="font-size: 14px;"></p>
+
+<div class="price-info" style="margin-bottom: -10px;">
+			
+	<div class="averagerating">
+    <span th:if="${averageRatings != null and averageRatings[product.id] == 0}"><i>Not yet rated</i></span>
+    <span th:if="${averageRatings != null and averageRatings[product.id] != 0}">
+        <span th:each="star : ${#numbers.sequence(1, 5)}">
+            <span th:if="${averageRatings[product.id] >= star}" class="fas fa-star"></span>
+            <span th:if="${averageRatings[product.id] >= (star - 0.5) and averageRatings[product.id] < star}" class="fas fa-star-half-alt"></span>
+            <span th:if="${averageRatings[product.id] < (star - 0.5)}" class="far fa-star"></span>
+        </span>
+    </span>
+    <span th:if="${ratingCounts != null}">(<span th:text="${ratingCounts[product.id]}">0</span> ratings)</span>
+</div>
+
+
+<p th:if="${product.deal != null}" style="display: inline-block;">
+
+<span class="discounted-price font-weight-bold"
+
+th:text="'₹' + ${product.price - (product.price * product.deal.discount / 100)}"></span>
+
+<span class="original-price" th:text="'₹' + ${product.price}"
+
+style="text-decoration: line-through; color: #888; margin-left: 5px;"></span>
+
+</p>
+
+<p class="price font-weight-bold" th:unless="${product.deal != null}"
+
+th:text="'Price: ₹' + ${product.price}" style="display: inline-block;"></p>
+
+</div>
+
+<div class="card-body d-flex justify-content-between align-items-center"
+
+style="padding-top: 2px; padding-bottom: 1px; ">
+
+<div class="row">
+
+<div class="col-auto" style="height: 52px; width: 150px;">
+
+<form action="/cart/add" method="post">
+
+<input type="hidden" name="productId" th:value="${product.id}" />
+
+<input type="hidden" name="quantity" value="1" style="display: none;" />
+
+<button type="submit" class="btn btn-primary btn-block custom-button"
+
+style="position: absolute; left: 3px;">Add to Cart</button>
+
+</form>
+
+</div>
+
+
+<div class="col-auto ml-auto"
+
+style="position: absolute; right: 3px; height: 52px; width: 175px;">
+ 
+ 
+  <a type="button" th:href="@{/buynow(id=${product.id})}" class="btn btn-success custom-button" th:text="'Buy Now'">Buy Now</a>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+<!-- column view cards  -->
+
+
+
+<style>
+.column-view-cards{
+	max-width: 90%;
+	margin-left:5%;
+	margin-right:5%;
+}
+.column-view-image{
+	z-index: 1; 
+	margin-top: 22px; 
+	margin-left:20px;
+	height:225px;
+	width:300px;
+	border-radius:5%;
+}
+.discount-badge{
+	z-index: 2; 
+	right: 25px; 
+	top: 10px;
+}
+.product-name{
+	color: black;
+	max-width:80%;
+}
+.brand-name{
+	font-size: 15px;
+}
+.category-field{
+	font-size: 14px;
+}
+.wishlistForm{
+margin-top: -125px; 
+margin-left: 530px;
+}
+.wishlistIcon-container{
+position:absolute;
+right:830px;
+}
+.product-deals{
+	display: inline-block;
+}
+.add-to-cart{
+	position: absolute; 
+	right: 220px;
+}
+.buy-now{
+	position: absolute;
+    right: 60px;
+    height: 52px;
+    width: 175px;
+}
+</style>
+
+<div class="column-view-cards">
+	<div class="card mb-3" th:each="product : ${products}">
+  	<div class="row g-0">
+  	
+   	<div class="col-md-4" >
+   	
+	<a th:href="@{/User/viewproduct(id=${product.id})}" style="text-decoration:none; color: black;">
+	<img th:src="@{'/images/' + ${product.imageFileName}}" class="column-view-image" alt="Product Image">
+   </div>
+    <div class="col-md-8">
+    <div calss="column-view-card-body">
+      <div class="card-body">
+       <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white px-2 py-1" id="discount-badge" th:if="${product.deal != null}" th:text="' ' + ${product.deal.discount + '% OFF'}">10% OFF</div>
+
+	<h5 class="card-title mb-1n product-name" th:text="${product.name}"></h5>
+
+	<p class="brand-name text-uppercase mb-2" th:text="${product.brand}"></p>
+	<p class="category-field mb-2 " th:text="${product.category?.name}"></p>
+	<p class="card-text mb-3" th:text="${product.description}"></p>
+
+	<div class="price-info">
+			
+	<div class="averagerating">
+    <span th:if="${averageRatings != null and averageRatings[product.id] == 0}"><i>Not yet rated</i></span>
+    <span th:if="${averageRatings != null and averageRatings[product.id] != 0}">
+        <span th:each="star : ${#numbers.sequence(1, 5)}">
+            <span th:if="${averageRatings[product.id] >= star}" class="fas fa-star"></span>
+            <span th:if="${averageRatings[product.id] >= (star - 0.5) and averageRatings[product.id] < star}" class="fas fa-star-half-alt"></span>
+            <span th:if="${averageRatings[product.id] < (star - 0.5)}" class="far fa-star"></span>
+        </span>
+    </span>
+    <span th:if="${ratingCounts != null}">(<span th:text="${ratingCounts[product.id]}">0</span> ratings)</span>
+	</div>
+
+
+<div class="container" >
+	<form th:action="@{/wishlist/add}" method="post" class="wishlistForm">
+	<input type="hidden" name="productId" th:value="${product.id}">
+	<button type="submit" class="wishlistButton btn btn-link">
+	<span class="wishlistIcon-container">
+	<i class="wishlistIcon far fa-heart"></i>
+	</span>
+	</button>
+	</form>
+</div>
+
+
+<p th:if="${product.deal != null}" class="product-deals">
+<span class="discounted-price font-weight-bold" th:text="'₹' + ${product.price - (product.price * product.deal.discount / 100)}"></span>
+<span class="original-price" th:text="'₹' + ${product.price}" style="text-decoration: line-through; color: #888; margin-left: 5px;"></span>
+</p>
+<p class="price font-weight-bold" th:unless="${product.deal != null}" th:text="'Price: ₹' + ${product.price}" style="display: inline-block;"></p>
+</div>
+<div class="card-body d-flex justify-content-between align-items-center"style="padding-top: 2px; padding-bottom: 1px; ">
+
+</a> 
+
+<div class="row">
+<div class="col-auto" style="height: 52px; width: 150px;">
+<form action="/cart/add" method="post">
+<input type="hidden" name="productId" th:value="${product.id}" />
+<input type="hidden" name="quantity" value="1" style="display: none;" />
+<button type="submit" class="btn btn-warning btn-block custom-button add-to-cart">Add to Cart</button>
+</form>
+</div>
+<div class="col-auto ml-auto buy-now">
+<a type="button" th:href="@{/buynow(id=${product.id})}" class="btn btn-success custom-button" th:text="'Buy Now'">Buy Now</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+
+function goBack() {
+
+window.history.back();
+
+}
+
+function applyFilters(filterType) {
+
+const productItems = document.querySelectorAll(".deal-card");
+
+const filterValue = prompt("Enter " + filterType + " to filter by:");
+
+let filterField;
+
+switch (filterType.toLowerCase()) {
+
+case "name":
+
+filterField = ".card-title";
+
+break;
+
+case "brand":
+
+filterField = ".brand-name";
+
+break;
+
+case "category":
+
+filterField = ".category-field";
+
+break;
+
+case "price":
+
+filterField = ".price-info";
+
+break;
+
+default:
+
+return;
+
+}
+
+for (let i = 0; i < productItems.length; i++) {
+
+const productItem = productItems[i];
+
+const fieldValue = productItem.querySelector(filterField).textContent.toLowerCase();
+
+if (fieldValue.includes(filterValue.toLowerCase())) {
+
+productItem.classList.remove("hide");
+
+} else {
+
+productItem.classList.add("hide");
+
+}
+
+}
+
+}
+
+const resetFilter = document.getElementById("resetFilter");
+
+resetFilter.addEventListener("click", function () {
+
+const productItems = document.querySelectorAll(".deal-card");
+
+productItems.forEach(function (productItem) {
+
+productItem.classList.remove("hide");
+
+});
+
+});
+
+</script>
+
+
+
+<!-- google languages script -->
+
+<script type="text/javascript">
+
+function googleTranslateElementInit() {
+
+new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+
+}
+
+function toggleHeart(element) {
+
+element.classList.toggle('clicked');
+
+}
+
+</script>
+
+<script type="text/javascript"
+
+src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+
+</html>

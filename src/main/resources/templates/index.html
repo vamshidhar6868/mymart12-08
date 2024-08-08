@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>my mart</title>
+<link href="/images/mymartlogo/mymart-logo.png" rel="icon">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<style>
+.navbar {
+	background-color: #ADD8E6;
+}
+
+.jumbotron {
+	background-color: #f8f9fa;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+
+.card-body {
+	background-color: #fff;
+}
+
+.card-body:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav {
+	display: flex;
+	list-style: none;
+	padding: 0;	
+}
+
+.nav-item {
+	position: relative;
+	margin-right: 10px;
+}
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+}
+
+.nav-item:hover .dropdown-menu {
+	display: block;
+}
+
+.dropdown-submenu {
+	position: relative;
+	padding-bottom: 15px;
+}
+
+.dropdown-submenu .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -1px;
+}
+
+.dropdown-item:hover {
+	background-color: aliceblue;
+	color: black;
+}
+
+footer {
+	background-color: black; /* Set the background color */
+	color: red; /* Set text color */
+	padding: 60px 0;
+	/* Increase padding to give more space inside the footer */
+	margin-bottom: 0px;
+	/* Add margin to push it to the bottom of the page */
+	height: 200px
+}
+
+.footer-link {
+	color: #8B0000;
+}
+
+
+.mt-5 {
+	/* Adjust top property to move the section further down */
+	top: 70px; /* Adjust as needed */
+}
+
+.col-md-4 .list-unstyled {
+	display: flex; /* Display the list items horizontally */
+	flex-wrap: wrap;
+	/* Allow items to wrap to the next line if there's not enough space */
+}
+
+.col-md-4 .list-unstyled li {
+	margin-right: 15px; /* Add some space between each list item */
+}
+
+#backToTopBtn {
+	display: none; /* Hide the button by default */
+	position: fixed;
+	bottom: 20px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background-color: #232f3e; /* Match your footer background color */
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 4px;
+}
+
+#backToTopBtn:hover {
+	background-color: #444; /* Darker background color on hover */
+}
+
+footer.footer1 {
+	text-align: center;
+	top: 10%;
+	font-size: 18px; /* Adjust the font size as needed */
+	background-color: #696969;
+}
+
+.col-md-4 .list-unstyled {
+	display: flex; /* Display the list items horizontally */
+	flex-wrap: wrap;
+	/* Allow items to wrap to the next line if there's not enough space */
+}
+
+.col-md-4 .list-unstyled li {
+	margin-right: 15px; /* Add some space between each list item */
+}
+
+ul li {
+	list-style-type: none;
+}
+
+/* languages banned hide css */
+.goog-te-banner-frame {
+	display: none !important
+}
+
+.skiptranslate {
+	display: none !important
+}
+
+/* location css */
+
+#addressContainer {
+	display: none;
+	position: absolute;
+	top: calc(100% + 3px);
+	right: 80px;
+	width: 500px;
+	background-color: skyblue;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	font-size: 14px;
+	z-index: 999;
+}
+
+@media ( max-width :767px) {
+	.collapse navbar-collapse {
+		width: 50%;
+		margin-bottom: 30px;
+	}
+}
+
+.alert {
+	position: absolute;
+	z-index: 3;
+	left: 20%;
+	justify-content: center;
+	align-item: center;
+}
+
+
+.btn-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1; /* Ensure it's on top of other content */
+}
+
+/*DropDown list css */
+.navbar-custom {
+	background-color: #515d69;
+}
+
+.navbar-custom .nav-link {
+	color: #fff;
+}
+
+.navbar-custom .dropdown-menu {
+	background-color: #30612f;
+}
+
+.navbar-custom .dropdown-item {
+	color: #fff;
+}
+
+.navbar-custom .dropdown-item:hover {
+	background-color: red;
+	border-left: 5px solid orange;
+	border-right: 5px solid orange;
+	color:white;
+}
+
+.dropdown-toggle::after {
+	transform: rotate(0deg);
+	transition: transform 0.5s;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+	transform: rotate(180deg);
+}
+
+.dropdown-submenu.dropdown-toggle::after {
+	transform: rotate(0deg);
+	transition: transform 0.5s;
+}
+
+.dropdown-submenu:hover .dropdown-toggle::after {
+	transform: rotate(270deg);
+}
+
+.profileDrop :hover {
+	background-color: red;
+	border-left: 5px solid orange;
+	border-right: 5px solid orange;
+	color:white;
+}
+
+.first:hover svg {
+	transform: rotate(360deg);
+	transition: transform 0.59s ease;
+}
+
+.second:hover svg {
+	transform: rotate(360deg);
+	transition: transform 0.59s ease;
+}
+
+.third:hover svg {
+	transform: rotate(360deg);
+	transition: transform 0.59s ease;
+}
+
+.fourth:hover svg {
+	transform: rotate(360deg);
+	transition: transform 0.59s ease;
+}
+
+.fifth:hover svg {
+	transform: rotate(360deg);
+	transition: transform 0.59s ease;
+}
+
+/* location css */
+
+#addressContainer {
+	display: none;
+	position: absolute;
+	top: calc(100% + 3px);
+	right: 80px;
+	width: 200px;
+	background-color: #f4f4f4;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	font-size: 14px;
+	z-index: 999;
+}
+
+.navbar {
+	background-color: #ADD8E6;
+}
+
+.jumbotron {
+	background-color: #f8f9fa;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-primary:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+
+.card-body {
+	background-color: #fff;
+}
+
+.card-body:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav {
+	display: flex;
+	list-style: none;
+	padding: 0;
+}
+
+.nav-item {
+	position: relative;
+	margin-right: 10px;
+}
+
+.dropdown {
+	position: relative;
+}
+
+.dropdown-menu {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+}
+
+.dropdown-submenu {
+	position: relative;
+	padding-bottom: 15px;
+}
+
+.dropdown-submenu .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-top: -1px;
+}
+
+.dropdown-item:hover {
+	background-color: skyblue;
+	color: black;
+	display: inline-block;
+	transition: transform 0.3s ease-in-out;
+}
+/* location css */
+#addressContainer {
+	display: none;
+	position: absolute;
+	top: calc(100% + 3px);
+	right: 80px;
+	width: 200px;
+	background-color: #f4f4f4;
+	padding: 10px;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	font-size: 14px;
+	z-index: 999;
+}
+
+nav{
+color:black;
+}
+body {
+	overflow-x: hidden;
+}
+</style>
+
+<script>
+  $(document).ready(function(){
+	    // Hide all dropdown menus initially
+	    $('.dropdown-menu').hide();
+	    
+	    // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+	    $('.nav-link.dropdown-toggle').hover(function(){
+	        $('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+	    $('.dropdown-item.dropdown-toggle').hover(function(){
+	        $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // Hide dropdown menus when mouse is not hovering over any dropdown
+	    $('.dropdown').mouseleave(function() {
+	        $('.dropdown-menu').hide();
+	    });
+	});
+</script>
+</head>
+
+<body>
+
+									<!-- Navigation Bar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top" style="background-color:lightskyblue; color: black;">
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<img src="/images/mymartlogo/mymart-logo.png" alt="---" height="50" width="50" style="margin-right: 10px; align-items: self-start">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<script>
+  $(document).ready(function(){
+	    // Hide all dropdown menus initially
+	    $('.dropdown-menu').hide();
+	    
+	    // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+	    $('.nav-link.dropdown-toggle').hover(function(){
+	        $('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+	    $('.dropdown-item.dropdown-toggle').hover(function(){
+	        $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+	        $(this).next('.dropdown-menu').show();
+	    });
+	    
+	    // Hide dropdown menus when mouse is not hovering over any dropdown
+	    $('.dropdown').mouseleave(function() {
+	        $('.dropdown-menu').hide();
+	    });
+	});
+</script>
+
+
+		
+	<div class="collapse navbar-collapse " id="navbarNavDropdown">
+	<ul class="navbar-nav ">
+	<li class="nav-item" th:each="navbarItem : ${navbarWithDropdownData}">
+	<div class="dropdown">
+	<a th:if="${#lists.isEmpty(navbarItem.value)}" class="nav-link text-dark" th:href="${navbarItem.key != null ? (navbarItem.key.itemName == 'Admin' ? '/Admin/' + navbarItem.key.itemName : navbarItem.key.itemName) : ''}" th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}">
+			
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  	<path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+  	<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+	</svg>
+			
+	
+	</a> <a th:if="${not #lists.isEmpty(navbarItem.value)}" class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}" style="display:none">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
+  	<path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0" />
+  	<path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z" />
+	</svg>
+	</a>
+	
+		<!-- 
+	
+	
+	 <div class="dropdown-menu " aria-labelledby="navbarDropdown" style="background-color: midnightblue";>
+	<div th:each="dropdownItem : ${navbarItem.value}">
+	
+	<div class="dropdown-submenu" style="background-color: midnightblue;">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropdownItem.itemName == 'Admin' ? '/Admin/' + dropdownItem.itemName : '/User/' + dropdownItem.itemName}" th:text="${dropdownItem.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color:midnightblue;">
+	<div th:each="dropChild : ${dropdownItem.dropChildren}">
+	
+	<div class="dropdown-submenu" style="background-color: midnightblue;">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChild.itemName == 'Admin' ? '/Admin/' + dropChild.itemName : '/User/' + dropChild.itemName}" th:text="${dropChild.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color: midnightblue;">
+	<div th:each="dropChildOfChild : ${dropChild.dropChildrenOfChild}">
+	<div class="dropdown-submenu">
+	<a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChildOfChild.itemName == 'Admin' ? '/Admin/' + dropChildOfChild.itemName : '/User/' + dropChildOfChild.itemName}" th:text="${dropChildOfChild.itemName}"></a>
+	
+	<div class="dropdown-menu" style="background-color: midnightblue;">
+	<a class="dropdown-item" th:each="grandChild : ${dropChildOfChild.grandChildren}" th:href="${grandChild.itemName == 'Admin' ? '/Admin/' + grandChild.itemName : '/User/' + grandChild.itemName}" th:text="${grandChild.itemName}"></a>
+	</div>
+	</div>
+	</div>
+	 -->
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div> 
+	</div>
+	</li>
+	</ul>
+	</div>
+
+
+
+<!-- Search Bar  -->
+
+
+<form class="form-inline my-2 my-lg-0" id="labnol" action="/search" method="get">
+	<input class="form-control mr-sm-1" type="search" id="transcript" name="query" placeholder="Search" aria-label="Search" style="width: 220px;">
+	<svg onclick="startDictation(),play()" xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16" style="color: black;">
+    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"/>
+    </svg>
+    <button class="btn btn-danger my-2 my-sm-0" type="submit">Search</button>
+</form>
+
+<!-- Mic JavaScript -->
+
+
+<script>
+    function startDictation() {
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            var recognition = new SpeechRecognition();
+
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript.trim(); 
+                transcript = transcript.replace('.', ''); 
+                document.getElementById('transcript').value = transcript;
+                recognition.stop();
+                document.getElementById('labnol').submit();
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event.error);
+            };
+        } else {
+            console.error('Speech recognition not supported in this browser.');
+        }
+    }
+    <!-- beep sound code--->
+    function play() { 
+        var audio = new Audio( 'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3'); 
+        audio.play(); 
+    } 
+</script>
+
+
+<!-- Location NavigationBar -->
+
+
+<ul class="navbar-nav ml-4">
+	<li class="nav-item dropdown">
+	<a class="nav-link text-dark" id="locationButton">
+	<i class="fas fa-map-marker-alt"style="color: red;"></i> Location
+	</a>
+	</li>
+	<div id="addressContainer"></div>
+
+<script>
+  document.getElementById('locationButton').addEventListener('click', function() {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+        .then(response => response.json())
+        .then(data => {
+          var address = data.display_name;
+          document.getElementById('addressContainer').textContent = 'Your current address: ' + address;
+          document.getElementById('addressContainer').style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching address:', error);
+        });
+    });
+  });
+</script>
+
+
+
+
+<!-- Profile -->
+
+<li class="nav-item dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"aria-haspopup="true" aria-expanded="false" > 
+	<span class="dropdown-icon"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red;"></i>
+	</span> <span th:text="${#authentication.principal.name}" style="color:black"></span>
+	</a>
+	
+	<div class="dropdown-menu profileDrop" aria-labelledby="navbarDropdownMenuLink" style="background-color:lightskyblue;">
+	<a class="dropdown-item first" th:href="@{/profiles(name=${#authentication.principal.name})}" style="color:black">
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+	<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+	<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+    </svg>&nbsp My Profile
+    </a> 
+    
+    <a class="dropdown-item second" href="/wishlist/view" style="color:black">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+    </svg>&nbsp Wishlist</a> 
+    
+    <a class="dropdown-item third" href="/cart" style="color:black"> 
+    <svg xmlns="" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
+	<path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+    </svg>&nbsp Cart
+	</a> 
+	
+	<a class="dropdown-item fourth" href="/orders" style="color:black"> 
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+    </svg>&nbsp My Orders
+	</a> 
+	
+	 <a class="dropdown-item fifth" href="/logout" style="color:black">
+	 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16"> <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+     </svg> &nbsp Logout
+	</a>
+	</div>
+</li>
+
+
+
+<!-- Cart -->
+
+
+<li class="nav-item" th:unless="${#authorization.expression('isAuthenticated()')}">
+	<a class="nav-link text-dark " href="/login/profile/" role="button" aria-haspopup="true" aria-expanded="false"> 
+	<i class="fas fa-user-circle fa-lg" style="color: red"></i> Login
+	</a>
+	<li class="nav-item"><a class="nav-link text-dark" href="/cart">
+	<i class="fas fa-shopping-cart fa-lg" style="color: red"></i> Cart
+	</a>
+</li>
+
+<!-- cart -->		
+			
+
+<!--<li class="nav-item" th:if="${#authorization.expression('isAuthenticated()')}">
+    <a class="nav-link text-dark" th:href="@{/logout}">
+     <i class="fas fa-sign-out-alt fa-lg" style="color: #007bff;"></i> Logout
+    </a>
+</li>  -->
+	
+</ul>
+</div>
+</nav> <br>
+
+	
+	
+								<!-- Popup 	
+	
+
+
+<div class="container" style="position: absolute; margin-top: 17%; margin-left: 10%">
+
+
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	crossorigin="anonymous">
+</script>
+
+
+	<center>
+	<div class="popup">
+	<div class="alert  alert-dismissible fade show w-50" style="background-image: linear-gradient(#ddd6f3, #faaca8);" role="alert" th:each="image:${image}">
+	<strong><h4 style="color: blue;"><b><i>Welcome To MyMart</i></b></h4></strong>
+
+	<span class="showpopuplogo">
+	<img th:src="@{/images/logo1.png}" style="width: 18%; height: 18%; background: transparent; display: block; margin-left:none; martin-right:none
+	" alt="..."></span>
+
+ 	<main>
+	<div id="popupContainer" class="popup-container">
+	<div class="popup1">
+	<div class="discount">
+	<div class="description">
+	<i><h2 style="color: green;" th:text="${image.popupdata}"></h2></i>
+	</div>
+	</div>
+
+	<div class="discount">
+	<div class="description">
+	<i style="color: green;" th:text="${image.popupofferdata}"></i>
+	</div>
+	</div>
+	</div>
+	</div>
+	</main>
+
+	<marquee style="background: transparent; color: red; height: 30px; padding: 2px; text-align: center;">
+	<div class="discount">
+	<div class="description">
+	<b><i th:text="${image.popupmarqueedata}"></i></b>
+	</div>
+	</div>
+	</marquee>
+
+	<button type="button" style="background: transparent;" class="btn-close" data-dismiss="alert" aria-label="Close">X</button>
+	</div>
+	</div>
+	</div> 
+</center> -->	
+
+				<!-- Product Category Mobile, electronics, fashions and grocery etc...
+
+
+
+ <section class="category-items" style="display:flex; flex-direction:row;">
+ <ul style="display:flex; flec-direction:row; gap:7px;">
+ 	<li>
+	<a  href="/User/All Products" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/select-all.png" atl="all-products" style="height:50px; width:50px">
+	<h6 class="text-dark">AllProducts</h6>
+	</a>
+	</li>
+	
+	<li>
+ 	<a  href="/User/Mobiles" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/mobiles.png" atl="mobiles" style="height:50px; width:50px">
+	<h6 class="text-dark">Mobiles</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Electronics" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/electronics.png" atl="electronics" style="height:50px; width:50px">
+	<h6 class="text-dark">Electronics</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Fashion" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/fashions.png" atl="fashions" style="height:50px; width:50px">
+	<h6 class="text-dark">Fashions</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Furniture" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/furniture.png" atl="furniture" style="height:50px; width:50px">
+	<h6 class="text-dark">Furniture</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Stationary" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/stationary.png" atl="stationary" style="height:50px; width:50px">
+	<h6 class="text-dark">Stationary</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Footwear" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/footwear.png" atl="footwear" style="height:50px; width:50px">
+	<h6 class="text-dark">Footware</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Grocery" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/grocery.png" atl="grocery" style="height:50px; width:50px">
+	<h6 class="text-dark">Grocery</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Personal Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/automotive.png" atl="automative" style="height:50px; width:50px">
+	<h6 class="text-dark">Automative</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Personal Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/personal-hygiene.png" atl="categorymobile" style="height:50px; width:50px">
+	<h6 class="text-dark">PersonalCare</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Toys" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/toys.png" atl="toys" style="height:50px; width:50px">
+	<h6 class="text-dark">Toys</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Games" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/games.png" atl="games" style="height:50px; width:50px">
+	<h6 class="text-dark">Games</h6>
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Grocery" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/food.png" atl="food" style="height:50px; width:50px">
+	<h6 class="text-dark">Food</h6>
+	</a>
+	</li>
+	
+		<li>
+	<a  href="/User/Personal Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/productcategory/giftbox.png" atl="giftbox" style="height:50px; width:50px">
+	<h6 class="text-dark">Gifts</h6>
+	</a>
+	</li>
+</ul>
+ </section><br> -->
+
+
+
+										<!-- carousel  -->
+
+
+
+<section class="container mt-4" style=" width: 100%; display: contents">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1500">
+	<ol class="carousel-indicators">
+	<li th:each="image, status : ${images}" data-target="#carouselExampleIndicators" th:attr="data-slide-to=${status.index}"th:classappend="${status.index == 0} ? 'active'"></li>
+	</ol>
+	<div class="carousel-inner">
+	<div th:each="image, status : ${images}" class="carousel-item" th:classappend="${status.index == 0} ? 'active'">
+	<a th:href="@{'/User/' + ${image.category}}"> 
+	<img th:src="@{'/images/carousel/' + ${image.imageUrl}}" class="d-block w-100" th:alt="'Slide ' + ${status.index + 1}" />
+	</a>			
+	</div>
+	</div>
+	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> 
+	<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only"></span>
+	</a> 
+	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> 
+	<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+	<spanclass="sr-only"></span>
+	</a>
+</div>
+</section><br>
+
+
+
+
+
+
+						<!-- Product Categories ==>> Groceries -->
+
+
+
+ <section class="category-items" style="display:flex; flex-direction:row;">
+ <ul style="display:flex; flec-direction:row; gap:33px;">
+ 
+  	<li>
+	<a  href="/User/All Products" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/all-products.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+ 	<li>
+	<a  href="/User/Dairy Bread & Eggs" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/daily-bread-and-eggs.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+ 	<a  href="/User/Fruits & Vegitables" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/fruits-and-vegetables.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Cool Drinks & Juices" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/cooldrinks-and-juices.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Snacks & Munchies" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/snacks-and-munchies.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Break Fast & Instant Food" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/breakfast-and-instantfood.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Sweet Tooth" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/sweettooth.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Bakery & Biscuits" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/bakery-and-biscuits.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Tea, Coffee & Health Drink" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/tea-coffee-and-health-drinks.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Atta, Rice & Dal" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/atta-rice-and-dal.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>	
+	
+		<li>
+	<a  href="/User/Pooja-Items" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/pooja-items.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+</ul>
+</section><br> <br><br> <br><br> <br>
+ 
+ <section class="category-items" style="display:flex; flex-direction:row;">
+ <ul style="display:flex; flec-direction:row; gap:33px;">
+ 	<li>
+	<a  href="/User/Masala, Oil & More" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/masala-oil-and-more.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+ 	<a  href="/User/Sauces & Spreads" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/sauces-and-spreads.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Chicken, Meat & Fish" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/chicken-meat-and-fish.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Organic & Health Living" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/organic-and-healthliving.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Baby Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/baby-care.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Pharma & Willness" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/pharma-and-willness.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Cleaning Essentials" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/cleaning-essentials.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Stationary" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/home-and-office.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Pet Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/pet-care.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+	
+	<li>
+	<a  href="/User/Personal Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+	<img src="/images/grocerycategory/personal-care.jpg" atl="categorymobile" style="height:200px; width:125px">
+	</a>
+	</li>
+
+	 <li>
+		 <a  href="/User/Personal Care" style="height: 55px; width: 85px;background: none;border: none;display: flex; flex-direction: column; align-items: center; text-decoration:none;">
+			 <img src="/images/grocerycategory/paan-corner.jpg" atl="categorymobile" style="height:200px; width:125px">
+		 </a>
+	 </li>
+</ul>
+ </section><br> <br><br><br><br><br>
+ 
+ 
+ 								<!-- Cards -->
+
+<section>
+<div style="display: flex; flex-direction: row; gap: 28px; margin-left: 10px; width:fit-content;"> 
+<a href="/User/Fruits & Vegitables">
+<img alt="imq1" src="/images/cards/what-new.jpg" style="height:200px; width:310px;">
+</a>
+<a href="/User/Dried Delights & Seeds">
+<img alt="imq1" src="/images/cards/dried-delights-and-seeds.jpg" style="height:200px; width:310px;">
+</a>
+<a href="/User/Cleaning Essentials">
+<img alt="imq1" src="/images/cards/comfortable-periods.jpg" style="height:200px; width:310px;">
+</a>
+<a href="/User/Sauces & Spreads">
+<img alt="imq1" src="/images/cards/sip-sip-hurry.jpg" style="height:200px; width:310px;">
+</a>
+</div>
+</section> <br>
+
+ 
+
+								<!-- Card Image -->
+
+
+<section>
+<a href="/User/Fruits & Vegitables">
+<img alt="img" src="/images/cards/paratha-makers.jpg" style="width: 98%; margin-left: 1%; margin-right: 1%;">
+</a>
+</section><br>
+
+
+
+										
+										<!-- Cards -->	
+																			
+
+
+	<div class="row" style="margin-left: 10px; margin-right: 10px;">
+	<div th:each="cardItem : ${cardItems}" class="col-md-3 mb-3">
+	<div class="card">
+	<div class="card-body" style="background-color:azure;">
+	<a href="/User/Fruits & Vegitables" style="color:black; text-decoration:none;">
+	<img th:src="@{'/images/cards/' + ${cardItem.imageUrl}}" class="card-img-top" th:alt="${cardItem.title}" style="border-radius:50%;">
+	<h5 class="card-title" th:text="${cardItem.title}"></h5>
+	</a>
+	</div>
+	</div>
+	</div>
+	</div>
+
+
+									<!-- Cards Grid -->
+									
+
+<style>
+.cards-grid{
+    height: 480px;
+    width: 98%;
+	margin-left:1%;
+	margin-right:1%;
+}
+.section1{
+	display:grid;
+    display: flex;
+    height:200px;
+}
+.appliances{
+display: flex;
+    width: 50%;
+    height:300px;
+}
+.kitchenwear{
+    display: flex;
+    width: 50%;
+    height: 300px;
+    
+}
+.section2{
+    display: flex;
+    flex-direction:row;
+    height:300px;
+}
+.breakfast{
+display: flex;
+    height: 400px;
+    width: 500px;
+    
+}
+.pharmacy{
+display: flex;
+   isplay: flex;
+    height: 400px;
+    width: 500px;
+
+}
+.petcare{
+display: flex;
+   isplay: flex;
+    height: 400px;
+    width: 500px;
+    
+}
+</style>
+
+
+<section class="cards-grid">
+<div class="section1">
+<div class="appliances">
+<a href="/User/Appliances">
+<img alt="" src="/images/cards/appliances.jpg" style="height:180px; width:650px">
+</a>
+</div>
+<div class="Kitchenware">
+<a href="/User/Kitchenware">
+<img alt="" src="/images/cards/kitchenware.jpg"  style="height:180px; width:660px">
+</a>
+</div>
+</div>
+<div class="section2">
+<div class="breakfast">
+<a href="/User/Break Fast & Instant Food">
+<img alt="" src="/images/cards/wake-up-good-morning.jpg" style="height:250px; width:430px;">
+</a>
+</div>
+<div class="pharmacy">
+<a href="/User/Personal Care">
+<img alt="" src="/images/cards/pharmacy.jpg" style="height:250px; width:430px;">
+</a>
+</div>
+<div class="petcare">
+<a href="/User/Pet Care">
+<img alt="" src="/images/cards/pet-care.jpg" style="height:250px; width:430px">
+</a>
+</div>
+</div>
+</section>
+
+
+								<!-- Our trust / free-delevery / Qualiy -->
+
+
+<div class="ourgraantee-heading text-center"><h1>Our Guarantees</h1></div> <br>
+<div class="our-guarantees" style="display:flex;  flex-direction:row; justify-content:space-around;">
+  
+	<div class="quality">
+	<img src="/images/ourguarantees/premium-quality.png" height="100" width="100">
+	<h4 class="text-center">Quality</h4>
+	<h6 class="text-center">You can Trust</h6>
+	</div>
+	<div class="free-delivery">
+	<img src="/images/ourguarantees/delivery.png" height="100" width="100">	 
+	<h4 class="text-center">Free</h4>
+	<h6 class="text-center">Delivery</h6>
+	</div>
+	<div class="on-time-guarantee">
+	<img src="/images/ourguarantees/punctuality.png" height="100" width="100"> 
+	<h4 class="text-center">On Time</h4>
+	<h6 class="text-center">Delivery</h6>
+	</div>
+	<div class="tracking">
+	<img src="/images/ourguarantees/tracking.png" height="100" width="100"> 
+	<h4 class="text-center">Accuracy</h4>
+	<h6 class="text-center">Tracking</h6>
+	</div>
+	<div class="24X7">
+		<img src="/images/ourguarantees/support.png" height="100" width="100">
+		<h4 class="text-center">24X7</h4>
+		<h6 class="text-center">Support</h6>
+	</div>
+</div> <br>
+
+									
+									<!-- Footer Section -->
+												
+												
+
+<footer class="footer mt-9 py-3" style="background-color:lightskyblue; color: black; height: 300px;">
+
+ <div class="container">
+	<div class="row">
+	<div class="col-md-3" style="left: 15%">
+	<h5>
+	<span style="color: black;">About Us</span>
+	</h5>				
+	<ul>
+	<li th:each="aboutus : ${aboutusList}">
+	<a style="color: black" th:href="@{'/aboutus/' + ${aboutus.id}}" th:text="${aboutus.aboutus}"></a>
+	</li>
+	</ul>		
+	</div>
+	
+	<div class="col-md-3" style="left: 20%">
+	<h5>
+	<span style="color: black;">Consumer Policy</span>
+	</h5>
+	<ul>
+	<li th:each="consumerpolicy : ${consumerpolicyList}">
+	<a style="color: black" th:href="@{'/consumerpolicy/' + ${consumerpolicy.id}}" th:text="${consumerpolicy.consumerpolicy}"></a> 
+	<a href="https://www.google.com" target="_blank"></a>
+	</li>
+	</ul>			
+	</div>
+	
+	<div class="col-md-3" style="left: 30%">
+	<h5>
+	
+	<span style="color: black;">Customer Support</span>
+	</h5>
+	<ul>
+	<li th:each="customersupport : ${customersupportList}">
+	<a style="color: black" th:href="@{'/customersupport/' + ${customersupport.id}}" th:text="${customersupport.customersupport}"></a></li>
+	</ul>
+	</div>
+
+	<div class="col-md-3 mt-5" style="top: 80%; left: 10%;">
+	<h5>
+	<span style="color: black;"><!-- DownloadApps --></span>
+	</h5>
+	<ul class="list-unstyled" style="bottom: -150px; position: absolute;right: 18px; left:-25px">
+	<li th:each="downloadapps : ${downloadappsList}"style="margin-bottom: 12%; display: ruby;">
+	<a href="https://play.google.com/store/apps/details?id=sa.com.mymart&pcampaignid=web_share">
+	<img th:src="@{'/images/downloadapps/' + ${downloadapps.googleplaystore}}" alt="..." width="150" height="50"></a></li>
+	<li th:each="downloadapps : ${downloadappsList}" style="margin-bottom: 12%; display: ruby;">
+	<a href="https://www.apple.com/in/app-store/"><img th:src="@{'/images/downloadapps/' + ${downloadapps.applestore}}" alt="..."width="150" height="50"></a>
+	</li>
+	</ul>
+	</div>
+
+	<div class="col-md-3 mt-3" style="left: 15%">
+	<h5>
+	<span style="color: black;">Mail Us</span>
+	</h5>
+	<ul class="list-unstyled">
+	<li th:each="mailus : ${mailusList}">
+	<a "@{'/mailus/' + ${mailus.id}}" th:text="${mailus.mailus}"></a></li>
+	</ul>
+	</div>
+	<span style="position: absolute; left: 0%;">
+	<img src="/images/mymartlogo/mymart-logo.png" alt="---" height="150" width="150" style="margin-right: 10px; align-items: self-start; margin-left:15px;"></span>
+
+	<div class="col-md-3 mt-3" style="left: 20%;">
+	<h5>
+	<span style="color: black;">Registered Office Address</span>
+	</h5>
+	<ul class="list-unstyled">
+	<li th:each="roaddress : ${roaddressList}">
+	<a href="https://www.google.com/maps/place/My+Mart/@16.5191345,80.3960663,11z/data=!4m10!1m2!2m1!1smy+mart!3m6!1s0x3a35e4d3b916fe71:0x8729248c6061bf9b!8m2!3d16.5191345!4d80.6844574!15sCgdteSBtYXJ0IgOIAQFaCSIHbXkgbWFydJIBDWdyb2Nlcnlfc3RvcmXgAQA!16s%2Fg%2F11f2r908x4?entry=ttu" target="_blank" style="font-size: 17px; color: black;" "@{'/roaddress/' + ${roaddress.id}}" th:text="${roaddress.roaddress}"></a>
+	</li>
+	</ul>
+	</div>
+	</div>
+</div>
+</footer>
+
+<footer class="footer1" style="background-color:lightskyblue">
+<div class="col-md-12 mt-6 mt-auto text-center background-color:red;margin-left: 50%; margin-top: 50%;">
+	<div class="col-md-3 ">
+	<h5>
+	<span style="color: black; display: flex;"> <!-- Keep In Touch --></span>
+	</h5>
+	
+	<ul class="list-unstyled" style=" display:flex; flex-direction:row; gap:10px; margin-left:530px;">
+	<li th:each="keepintouch : ${keepintouchList}" style="margin-bottom: 15px; display: ruby;">
+	<a style="align-items: center;" href="https://www.google.com">
+	<img th:src="@{'/images/keepintouch/' + ${keepintouch.googleimage}}" alt="google" width="30" height="30">
+	</a>
+	</li>
+								
+	<li th:each="keepintouch : ${keepintouchList}" style="margin-bottom: 15px; display: ruby;">
+	<a style="align-items: center;" href="https://www.linkedin.com">
+	<img th:src="@{'/images/keepintouch/' + ${keepintouch.linkedinimage}}" alt="likedin" width="30" height="30">
+	</a>
+	</li>
+								
+	<li th:each="keepintouch : ${keepintouchList}"vstyle="margin-bottom: 15px; display: ruby;">
+	<a style="align-items: center;" href="https://www.facebook.com">
+	<img th:src="@{'/images/keepintouch/' + ${keepintouch.facebookimage}}" alt="fb" width="30" height="30">
+	</a>
+	</li>
+								
+	<li th:each="keepintouch : ${keepintouchList}" style="margin-bottom: 15px; display: ruby;">
+	<a style="align-items: center;" href="https://www.x.com">
+	<img th:src="@{'/images/keepintouch/' + ${keepintouch.ximage}}" alt="x" width="30" height="30"></a></li>
+								
+	<li th:each="keepintouch : ${keepintouchList}" style="margin-bottom: 15px; display: ruby;">
+	<a style="align-items: center;" href="https://www.instagram.com">
+	<img th:src="@{'/images/keepintouch/' + ${keepintouch.instargramiamge}}" alt="..." width="30" height="30">
+	</a>
+	</li>
+	</ul>
+</div>
+
+	<a href="conditions" class="mr-3" style="color:black">Conditions of Use & Sale</a> 
+	<a href="cancelreturn" class="mr-3" style="color:black">Privacy Notice</a> 
+	<a href="intrest" style="color:black">Interest-Based Ads</a>
+	</div>
+	<h6>
+	<span style="color: black;">© 2024, MyMart.com, Inc. or its affiliates</span>
+	</h6>
+
+</footer>
+		<button onclick="topFunction()" id="backToTopBtn" title="Go to top">&#8593;</button>
+
+	<!-- google languages script -->
+
+
+<script type="text/javascript">  
+   function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+</script>
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</body>
+</html>

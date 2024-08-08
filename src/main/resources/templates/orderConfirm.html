@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Confirmation</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f7f7; /* Light grey background for a more professional look */
+            color: #333; /* Dark gray text */
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        .card {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #007bff; /* Bootstrap primary blue */
+            color: white;
+        }
+
+        .card-title {
+            margin-bottom: 0;
+        }
+
+        .product-image {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .text-danger {
+            color: #dc3545; /* Bootstrap danger red */
+        }
+
+        .text-primary {
+            color: #007bff; /* Bootstrap primary blue */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .text-center {
+            margin-bottom: 20px;
+        }
+
+        .text-primary {
+            font-size: 1.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center text-primary"><strong><u>Your Order Is Confirmed</u></strong></h1>
+        <a class="btn btn-primary d-flex align-items-center mb-3" href="/" style="width: 100px; height: 40px;">
+            <i class="fas fa-home mr-2"></i> Home
+        </a>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <!-- Order Details Container -->
+                <div class="card" th:if="${orders}">
+                    <div class="card-header">
+                        <h4 class="card-title"><u>Order Details</u></h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Order Number: <span th:text="${orders.orderNumber}"></span></p>
+                        <p>Order Date: <span th:text="${orders.orderDate}"></span></p>
+                        <div th:each="item : ${orders.orderItems}">
+                            <div class="media mb-3">
+                                <a th:href="@{/cart/viewproduct(id=${item.product.id})}">
+                                    <img th:src="@{'/images/' + ${item.product.imageFileName}}" class="img-fluid product-image mr-3" alt="Product Image">
+                                </a>
+                                <div class="media-body">
+                                    <h5 class="mt-0" th:text="${item.product.name}">Product Name</h5>
+                                    <p>Quantity: <span th:text="${item.quantity}"></span></p>
+                                    <p>Price: $<span th:text="${item.product.price}"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary Container -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><u>Order Summary</u></h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>Subtotal: Rs. <span th:text="${subtotal}"></span></h5>
+                        <h5>Shipping Charges: Rs. <span th:text="${shipping}"></span></h5>
+                        <h4 class="text-danger">Total Amount: Rs. <span th:text="${total}" class="text-success"></span></h4>
+                    </div>
+                </div>
+
+                <!-- User Address Container -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><u>Shipping Address</u></h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:each="address : ${selectedAddress}">
+                            <p>
+                                <b><span th:text="${address.name + ' - ' + address.mobile}"></span></b><br>
+                                <span th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country + ', ' + address.zipCode}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><u>Billing Address</u></h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:each="address : ${selectedAddress}">
+                            <p>
+                                <b><span th:text="${address.name + ' - ' + address.mobile}"></span></b><br>
+                                <span th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country + ', ' + address.zipCode}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Address Modal -->
+    <div class="modal fade" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeAddressModalLabel">Change Shipping Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="changeAddressForm">
+                        <div class="form-group" th:each="address : ${allAddresses}">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="address" id="address[[${address.id}]]" th:value="${address.id}" th:checked="${address.id == selectedAddress.id}">
+                                <label class="form-check-label" th:for="address[[${address.id}]]">
+                                    <span th:text="${address.name + ' - ' + address.mobile}"></span><br>
+                                    <span th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country + ', ' + address.zipCode}"></span>
+                                </label>
+                            </div>
+                            <hr>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="changeAddress()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+</body>
+</html>

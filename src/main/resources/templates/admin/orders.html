@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Orders</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<style>
+    body{
+
+background-image: radial-gradient( circle 311px at 8.6% 27.9%,  rgba(62,147,252,0.57) 12.9%, rgba(239,183,192,0.44) 91.2% );
+    }
+</style>
+</head>
+
+
+<body >
+    <center><h1>Manage Orders</h1></center>
+
+    <table  class="table table-bordered table-hover table-dark" >
+        <thead>
+            <tr>
+                <th class="bg-danger text-center">Order ID</th>
+                <th class="bg-danger text-center">User ID</th>
+                <th class="bg-danger text-center">Transaction ID</th>
+                <th class="bg-danger text-center">Total Amount</th>
+                <th class="bg-danger text-center">Status</th>
+                <th class="bg-danger  text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over orders and display details -->
+            <th:block th:each="order : ${orders}">
+                <tr>
+                    <td class="bg-danger text-center " th:text="${order.id}"></td>
+                    <td class="text-center" th:text="${order.user.id}"></td>
+                    <td class="text-center" th:text="${order.paymentTransactionId}"></td>
+                    <td class="text-center" th:text="${order.totalAmount}"></td>
+                    <td class="text-center" th:text="${order.status}"></td>
+                    <td>
+                    <div class="row">
+                    <div class="col m-2">
+                        <!-- Button to accept order -->
+                        <form method="post" th:action="@{/admin/orders/{orderId}/accept(orderId=${order.id})}">
+                            <button class="btn btn-success btn-sm " type="submit">Accept</button>
+                        </form>
+                        </div>
+
+                         <div class="col">
+                        <!-- Button to cancel order -->
+                        <form method="post" th:action="@{/admin/orders/{orderId}/cancel(orderId=${order.id})}">
+                            <button class="btn btn-danger btn-sm" type="submit">Cancel</button>
+                        </form>
+                        </div>
+
+                         <div class="col">
+                        <!-- Button to mark order as delivered -->
+                        <form method="post" th:action="@{/admin/orders/{orderId}/mark-delivered(orderId=${order.id})}">
+                            <button class="btn btn-secondary btn-sm" type="submit">Mark as Delivered</button>
+                        </form>
+                        </div>
+
+                        </div>
+
+                    </td>
+                </tr>
+            </th:block>
+        </tbody>
+    </table>
+</body>
+</html>

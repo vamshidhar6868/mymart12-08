@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Mart | About Us</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+
+            margin: 0;
+            padding: 0;
+
+        }
+
+
+        nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #1e66d1e1;
+        }
+
+        nav li.active a {
+            font-weight: bold;
+        }
+
+
+      #img-1 {
+        height: 400px;
+        width: 600px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 40px 50px -12px;
+        position: relative;
+        margin-left: 85px;
+        animation: slideFromLeft 2s forwards;
+        margin-top: 18px;
+        border-radius: 0px 60px 0px 60px;
+    }
+
+    #img-2 {
+        height: 400px;
+        width: 600px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 40px 50px -12px;
+        position: relative;
+        margin-left: 25px;
+        animation: slideFromright 2s forwards;
+        margin-top: 18px;
+        border-radius: 0px 60px 0px 60px;
+    }
+
+    #img-3 {
+        height: 400px;
+        width: 620px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 40px 50px -12px;
+        position: relative;
+        margin-left: 40px;
+        animation: slideFromLeft 2s forwards;
+        margin-top: 18px;
+        border-radius: 0px 60px 0px 60px;
+    }
+
+    #img-4 {
+        height: 400px;
+        width: 600px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 40px 50px -12px;
+        position: relative;
+        margin-left: 25px;
+        animation: slideFromright 2s forwards;
+        margin-top: 18px;
+        border-radius: 0px 60px 0px 60px;
+    }
+
+    .header {
+        margin-bottom: 80px;
+        margin-top: 40px;
+
+    }
+
+    @keyframes slideFromLeft {
+        0% {
+            left: -300px;
+        }
+
+        100% {
+            left: 0;
+        }
+    }
+
+    @keyframes slideFromright {
+        100% {
+            right: 0;
+        }
+
+        0% {
+            right: -300px;
+        }
+
+
+    }
+      .navi ul li a{
+      padding: 10px;
+      font-size:16px;
+    }
+
+    </style>
+</head>
+
+<body >
+    <nav class="navbar navbar-expand-lg bg-body-tertiary " >
+        <div class="container-fluid" style="background-color:#217b7e;">
+          <a class="navbar-brand text-light" href="#">MY MART</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse navi" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a class="nav-link active text-light" onclick="goBack()" href="#">Back</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active text-light" href="/">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link active text-light" href="/cart">Cart</a>
+              </li>
+            </ul>
+               <form class="form-inline my-2 my-lg-0" action="/search" method="get"
+            style="display: inline; right: 70px">
+
+            <input class="form-control mr-sm-2" type="search" name="query"
+                placeholder="Search here" aria-label="Search" style="width: 350px;">
+
+            <button class="btn btn-outline-light my-2 my-sm-0 mr-2"
+                type="submit" style="width: 100px;">
+                <i class="fas fa-search"></i>Search
+            </button>
+
+        </form>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container-fluid" >
+       <div class="container-fluid">
+        <div class="header">
+            <h3 class="text-center" style="color: teal;">Welcome to mymart</h3>
+            <h4 class="text-center text-secondary">Aboutus</h4>
+            <hr>
+        </div>
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+            <div class="col">
+                <img id="img-1"
+                    src="https://media.istockphoto.com/id/1271390356/photo/shopping-basket-with-indian-rupees-money-around-food-products-vegetables-and-fruits-the.jpg?b=1&s=612x612&w=0&k=20&c=Zk7Bo59mLo6sWNFDV11NovNaL_zi9KKCeUUPws9MZ2I="
+                    alt="">
+            </div>
+            <div class="col-6" style="background-color: azure; border-radius: 15px; margin-right: 18px; ">
+                <p class="mt-4 p-4 " style="font-size: 18px;"> Ecommerce website designs have evolved so much, it can be
+                    hard
+                    to keep up. These websites didn't just keep up though - they are the ones pushing the boundaries!
+                    Ecommerce. It’s grown to be such a big presence all around the internet, and in all of our lives.
+                    More and more, stores are investing a great deal of resources into moving their business online,
+                    with the promise of reaching a bigger audience. But what makes a good ecommerce website
+                    Ecommerce website designs have evolved so much, it can be hard to keep up. These websites didn't
+                    just keep up though - they are the ones pushing the boundaries!
+                    Ecommerce. It’s grown to be such a big presence all around the internet, and in all of our lives.
+                    More and more, stores are investing a great deal of resources into moving their business online,
+                    with the promise of reaching a bigger audience. But what makes a good ecommerce website</p>
+            </div>
+        </div>
+
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+
+            <div class="col-6" style="background-color: azure; border-radius: 15px; margin-right: 18px; ">
+                <p class="mt-4 p-4 " style="font-size: 18px;"> “my mart” business was doing well, however the growth
+                    from one branch to multiple
+                    branches was not being supported by strong processes which represented a challenge to
+                    the sustainability and limited further growth and profitability of the business.
+                    Eng. of items on the shelves. The
+                    starting point of the “my mart’s” Lean journey was the need to sustain such a complex
+                    product portfolio through flexible procurement while minimizing the cost of inventory.
+
+                    When Eng. Abdulsalam was asked to support the management of “my mart” he found it to
+                    have excess, slow moving inventory (40% of it were items with stock coverage above 6
+                    months’ worth of sales). A second challenge was represented by broken buying processes
+                    and an unclear procurement strategy (the supply base was composed by 480 suppliers,
+                    broken down to an average of 11 suppliers per product family).</p>
+            </div>
+            <div class="col">
+                <img id="img-2" src="https://cdn.pixabay.com/photo/2016/03/02/20/13/grocery-1232944_640.jpg" alt="">
+            </div>
+        </div>
+
+
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+            <div class="col">
+                <img id="img-3"
+                    src="https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+            </div>
+            <div class="col-6"
+                style="background-color: azure; border-radius: 15px; margin-right: 18px; margin-top: 20px; ">
+                <p class="mt-4 p-4 " style="font-size: 18px;"> The results achieved by the “my mart” project team were
+                    impressive. One of the most
+                    difficult challenges was re-structuring the in re-designing their processes from the
+                    first day and their resistance to change was dealt with immediately. Eventually the
+                    buying team understood that the new Lean processes would make their life easier and felt
+                    a sense of ownership since they were fully involved in building those processes from the
+                    beginning. A substantial amount of effort was also required to review the allocation of
+                    products to suppliers in order to enable the supply base reduction. However, the team
+                    understood that this would have eventually led to a lower workload once the supply base
+                    was simplified and were thus motivated to carry on the review.</p>
+            </div>
+        </div>
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+
+            <div class="col-6" style="background-color: azure; border-radius: 15px; margin-right: 18px; ">
+                <p class="mt-4 p-4 " style="font-size: 18px;"> Ecommerce website designs have evolved so much, it can be
+                    hard to keep up. These websites didn't just keep up though - they are the ones pushing the
+                    boundaries! Ecommerce. It’s grown to be such a big presence all around the internet, and in all of
+                    our lives. More and more, stores are investing a great deal of resources into moving their business
+                    online, with the promise of reaching a bigger audience. But what makes a good ecommerce website
+                    Ecommerce website designs have evolved so much, it can be hard to keep up. These websites didn't
+                    just keep up though - they are the ones pushing the boundaries! Ecommerce. It’s grown to be such a
+                    big presence all around the internet, and in all of our lives. More and more, stores are investing a
+                    great deal of resources into moving their business online, with the promise of reaching a bigger
+                    audience. But what makes a good ecommerce website
+
+                    .</p>
+            </div>
+            <div class="col">
+                <img id="img-4"
+                    src="https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+            </div>
+        </div>
+
+
+
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+            <div class="col">
+                <img id="img-3"
+                    src="https://images.pexels.com/photos/3962285/pexels-photo-3962285.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    alt="">
+            </div>
+            <div class="col-6"
+                style="background-color: azure; border-radius: 15px; margin-right: 18px; margin-top: 20px; ">
+                <h4 style="margin-left: 40px; margin-top: 20px; color: rgb(0, 92, 92); ">What We Offer</h4> <hr>
+                <p class="p-2 " style="font-size: 18px;"> “my mart” business was doing well, however the growth from one branch to multiple
+                    branches was not being supported by strong processes which represented a challenge to
+                    the sustainability and limited further growth and profitability of the business.
+                    Eng.  of items on the shelves. The
+                    starting point of the “my mart’s” Lean journey was the need to sustain such a complex
+                    product portfolio through flexible procurement while minimizing the cost of inventory.
+
+                    When Eng. Abdulsalam was asked to support the management of “my mart” he found it to
+                    have excess, slow moving inventory (40% of it were items with stock coverage above 6
+                    months’ worth of sales). A second challenge was represented by broken buying processes
+                    and an unclear procurement strategy (the supply base was composed by 480 suppliers,
+                    broken down to an average of 11 suppliers per product family).</p>
+            </div>
+        </div>
+
+
+        <div class="row" style=" height: 400px; border-radius: 10px; background-color:whitesmoke; height: 440px;">
+
+            <div class="col-6" style="background-color: azure; border-radius: 15px; margin-right: 18px; ">
+
+                 <h4 style="margin-left: 40px; margin-top: 30px; color: rgb(0, 92, 92);">Features Mart</h4> <hr>
+                <p class=" p-2 " style="font-size: 18px;"> The results achieved by the “my mart” project team were impressive. One of the most
+                    difficult challenges was re-structuring the in re-designing their processes from the
+                    first day and their resistance to change was dealt with immediately. Eventually the
+                    buying team understood that the new Lean processes would make their life easier and felt
+                    a sense of ownership since they were fully involved in building those processes from the
+                    beginning. A substantial amount of effort was also required to review the allocation of
+                    products to suppliers in order to enable the supply base reduction. However, the team
+                    understood that this would have eventually led to a lower workload once the supply base
+                    was simplified and were thus motivated to carry on the review.
+
+                    .</p>
+            </div>
+            <div class="col">
+                <img id="img-4"
+                    src="https://cdn.pixabay.com/photo/2015/09/21/14/24/supermarket-949913_640.jpg"
+                    alt="">
+            </div>
+        </div>
+<hr>
+<p style="font-weight: 600;" class="text-center">My Mart-2024</p>
+<div class="col text-center" >
+    <a href="#" style="font-size: 18px; padding: 7px;">privacy policy</a>
+    <a href="#" style="font-size: 18px;">Terms & Condition</a>
+</div>
+
+    </div>
+
+    <script>
+function goBack() {
+
+    window.history.back();
+
+}
+</script>
+</body>
+
+</html>

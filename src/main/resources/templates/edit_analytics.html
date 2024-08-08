@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Analytics Field</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    .container {
+  width: 50%;
+  margin: 0 auto;
+}
+body{
+ background-image: url('images/backimg2.jpg');
+    background-size: cover;
+   /*  background-position: center; */
+    font-family: sans-serif;
+    background-repeat:no-repeat;
+    background-color:cyan;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+button[type="submit"],
+a.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+a.btn {
+  background-color: #6c757d;
+  color: white;
+  text-decoration: none;
+}
+
+a.btn:hover {
+  background-color: #5a6268;
+}
+
+    
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Analytics Field</h1>
+    <form th:action="@{/analytics/update/{id}(id=${field.id})}" method="post" th:object="${field}">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" class="form-control" th:field="*{description}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a th:href="@{/analytics}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
+

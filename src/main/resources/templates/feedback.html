@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#confirmationMessage {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #b2dba1;
+    border-radius: 4px;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h2>Feedback Form</h2>
+        <form id="feedbackForm">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" required></textarea>
+            </div>
+            <button type="submit">Submit Feedback</button>
+        </form>
+        <div id="confirmationMessage" style="display: none;">
+            <p>Thank you for your feedback!</p>
+        </div>
+    </div>
+
+    <script src="script.js">
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('feedbackForm');
+        const confirmationMessage = document.getElementById('confirmationMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const feedbackData = {};
+            formData.forEach((value, key) => {
+                feedbackData[key] = value;
+            });
+
+            // Normally, you would send this data to a server-side script using fetch or XHR
+            // For demonstration, we'll just log the data to console
+            console.log('Feedback Submitted:', feedbackData);
+
+            // Show confirmation message
+            form.style.display = 'none';
+            confirmationMessage.style.display = 'block';
+        });
+    });
+
+    </script>
+</body>
+</html>

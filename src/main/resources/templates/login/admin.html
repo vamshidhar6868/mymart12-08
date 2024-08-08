@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    rel="stylesheet">
+<link href="styles.css" rel="stylesheet">
+
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+.card-container .row {
+    width: 100%;
+}
+
+.card-container .col-md-4 {
+    flex: auto;
+}
+
+.cardsrowcontainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    width: 15rem;
+}
+
+.col {
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    background: radial-gradient(circle, #d1c4e9, #bbdefb);
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.carousel-control-prev {
+    background: radial-gradient(circle, #d1c4e9, #bbdefb);
+}
+
+.carousel-control-next {
+    background: radial-gradient(circle, #d1c4e9, #bbdefb);
+}
+
+.horizontalNav {
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(38, 51, 97, 1)
+        0%, rgba(65, 143, 222, 1) 79%);
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.dropdown-item:hover {
+    background-color: aliceblue;
+    color: black;
+}
+/*Sidebar toggle css*/
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        left: -100%;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 34px;
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+}
+
+.open-btn {
+    background-color: #2b11d2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.sidebar li a:hover {
+    background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(37, 145, 251,
+        0.98) 0.1%, rgba(0, 7, 128, 1) 99.8%);
+}
+</style>
+
+
+
+
+</head>
+<body>
+
+    <nav
+        class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top"
+        style="background-image: linear-gradient(90deg, #006241, #1DB954); color: black;">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav">
+
+                <li class="nav-item"
+                    th:each="navbarItem : ${navbarWithDropdownData}">
+
+                    <div class="dropdown">
+
+                        <a th:if="${#lists.isEmpty(navbarItem.value)}"
+                            class="nav-link text-light"
+                            th:href="${navbarItem.key != null ? '/Admin/' + navbarItem.key.itemName : ''}"
+                            th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+
+
+                        <a th:if="${not #lists.isEmpty(navbarItem.value)}"
+                            class="nav-link dropdown-toggle text-light" href="#"
+                            id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"
+                            th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <div th:each="dropdownItem : ${navbarItem.value}">
+
+                                <div class="dropdown-submenu">
+
+                                    <a class="dropdown-item dropdown-toggle" href="#"
+                                        th:href="${dropdownItem.itemName == 'Admin' ? '/Admin/' + dropdownItem.itemName : '/Admin/' + dropdownItem.itemName}"
+                                        th:text="${dropdownItem.itemName}"></a>
+
+                                    <div class="dropdown-menu">
+
+                                        <div th:each="dropChild : ${dropdownItem.dropChildren}">
+
+                                            <div class="dropdown-submenu">
+
+                                                <a class="dropdown-item dropdown-toggle" href="#"
+                                                    th:href="${dropChild.itemName == 'Admin' ? '/Admin/' + dropChild.itemName : '/Admin/' + dropChild.itemName}"
+                                                    th:text="${dropChild.itemName}"></a>
+
+                                                <div class="dropdown-menu">
+
+                                                    <div
+                                                        th:each="dropChildOfChild : ${dropChild.dropChildrenOfChild}">
+
+                                                        <div class="dropdown-submenu">
+
+                                                            <a class="dropdown-item dropdown-toggle" href="#"
+                                                                th:href="${dropChildOfChild.itemName == 'Admin' ? '/Admin/' + dropChildOfChild.itemName : '/Admin/' + dropChildOfChild.itemName}"
+                                                                th:text="${dropChildOfChild.itemName}"></a>
+
+                                                            <div class="dropdown-menu">
+
+                                                                <a class="dropdown-item"
+                                                                    th:each="grandChild : ${dropChildOfChild.grandChildren}"
+                                                                    th:href="${grandChild.itemName == 'Admin' ? '/Admin/' + grandChild.itemName : '/Admin/' + grandChild.itemName}"
+                                                                    th:text="${grandChild.itemName}"></a>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search"
+                    placeholder="Search" aria-label="Search" style="width: 430px;">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-4">
+                <li class="nav-item"><a th:href="@{/Admin/Navbar}"
+                    class="btn btn-primary text-dark text-decoration-none">Navbar</a></li>
+                <li class="nav-item"><span sec:authorize="isAuthenticated">
+
+                        <a th:href="@{/logout}"
+                        class="btn btn-outline-light text-dark text-decoration-none">Logout</a>
+
+                </span></li>
+
+
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <script>
+
+  $(document).ready(function(){
+
+        // Hide all dropdown menus initially
+
+        $('.dropdown-menu').hide();
+
+
+
+        // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+
+        $('.nav-link.dropdown-toggle').hover(function(){
+
+            $('.dropdown-menu').hide();
+
+            $(this).next('.dropdown-menu').show();
+
+        });
+
+
+
+        // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+
+        $('.dropdown-item.dropdown-toggle').hover(function(){
+
+            $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+
+            $(this).next('.dropdown-menu').show();
+
+        });
+
+
+
+        // Hide dropdown menus when mouse is not hovering over any dropdown
+
+        $('.dropdown').mouseleave(function() {
+
+            $('.dropdown-menu').hide();
+
+        });
+
+    });
+
+</script>
+
+
+    <!--  <div class="header text-center">
+    <h1>Welcome to ADMIN Dashboard</h1>
+</div>
+
+ <a th:href="@{/Admin/Product}" class="btn btn-primary text-dark text-decoration-none">Products</a>
+
+
+
+ <a class="btn" style="background-color:#FF69B4; color: black;" href="/reportadmin"><b>Read Suggestions from Customers</b></a>
+
+<a th:href="@{/Admin/Deals}" class="btn btn-info text-dark text-decoration-none">Deals</a>
+
+
+<a th:href="@{/admin/orders}" class="btn btn-primary text-dark text-decoration-none">Orders</a>
+
+
+<a th:href="@{/addpopupimage}" class="btn btn-secondary text-light text-decoration-none">create popup</a>
+ -->
+
+
+
+    <div class="container-fluid ">
+        <div class="row">
+            <nav id="sidebarMenu"
+                class="col-md-3 col-lg-2 d-md-block  sidebar collapse"
+                style="background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(38, 51, 97, 1) 0%, rgba(65, 143, 222, 1) 79%);">
+                <div class="position-sticky pt-3">
+                    <ul class="sidebar nav flex-column">
+                        <button class="close-btn">&times;</button>
+                        <br>
+                        <li class="nav-item "><a class="nav-link active text-light"
+                            aria-current="page" href="/Dashboard"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-speedometer2"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4M3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707M2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10m9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5m.754-4.246a.39.39 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.39.39 0 0 0-.029-.518z" />
+  <path fill-rule="evenodd"
+                                        d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A8 8 0 0 1 0 10m8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3" />
+</svg> <span data-feather="home"></span> Dashboard
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light"
+                            th:href="@{/admin/orders}"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-earmark-bar-graph"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M10 13.5a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-6a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5z" />
+  <path
+                                        d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+</svg> <span data-feather="file"></span> Orders
+                        </a></li>
+                        <li class="nav-item "><a class="nav-link text-light"
+                            th:href="@{/Admin/Product}" href="#"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+  <path
+                                        d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l.5 2H5V5zM6 5v2h2V5zm3 0v2h2V5zm3 0v2h1.36l.5-2zm1.11 3H12v2h.61zM11 8H9v2h2zM8 8H6v2h2zM5 8H3.89l.5 2H5zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
+</svg> <span data-feather="shopping-cart"></span> Products
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light"
+                            th:href="@{deals/addProductDeal}" href="#"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-lightning-charge"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09zM4.157 8.5H7a.5.5 0 0 1 .478.647L6.11 13.59l5.732-6.09H9a.5.5 0 0 1-.478-.647L9.89 2.41z" />
+</svg> <span data-feather="shopping-cart"></span> Add Deals
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light"
+                            href="/reportadmin"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor"
+                                    class="bi bi-envelope-check" viewBox="0 0 16 16">
+  <path
+                                        d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2zm3.708 6.208L1 11.105V5.383zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2z" />
+  <path
+                                        d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0m-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686" />
+</svg> <span data-feather="users"></span> Feedbacks
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light"
+                            href="/reportadmin"> <svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor"
+                                    class="bi bi-graph-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd"
+                                        d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07" />
+</svg> <span data-feather="bar-chart-2"></span> Reports
+                        </a></li>
+
+
+
+
+                        <li class="nav-item"><a class="nav-link text-light"
+                            href="/showpopup" data-toggle="popover" title="Popover Title"
+                            data-content="Popover Content"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-info-circle"
+                                    viewBox="0 0 16 16">
+            <path
+                                        d="M8 1.5a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13zm0 10a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-.93-3.306a.133.133 0 0 0 .133-.132c0-.073-.06-.133-.133-.133a.133.133 0 0 0-.133.133c0 .073.06.132.133.132zm1.4 1.85a.656.656 0 1 0 0 1.313.656.656 0 0 0 0-1.313z" />
+        </svg> <span data-feather="file"></span> Popups
+                        </a></li>
+
+                        <li class="nav-item"><a class="nav-link text-light"
+                            href="/createcard" data-toggle="popover" title="Popover Title"
+                            data-content="Popover Content"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-card-moving"
+                                    viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                                        d="M8 1.5a.5.5 0 0 1 .5.5V3h2.5a.5.5 0 0 1 .306.895L8.5 7.383V11.5a.5.5 0 0 1-1 0V7.383L5.194 3.895A.5.5 0 0 1 5.5 3H8V2a.5.5 0 0 1 .5-.5zm5 2a.5.5 0 0 0-.5-.5H11v-.5a.5.5 0 0 0-.5-.5H7a.5.5 0 0 0-.5.5v.5H4.5a.5.5 0 0 0-.306.895L6.5 7.383V11.5a1.5 1.5 0 0 0 3 0V7.383l2.306-3.588A.5.5 0 0 0 11.5 3H14a.5.5 0 0 0 .5-.5zM3 13v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V13H3z" />
+        </svg> <span data-feather="move"></span> Moving Cards
+                        </a></li>
+
+                        <li class="nav-item"><a class="nav-link text-light"
+                            href="/card" data-toggle="popover" title="Popover Title"
+                            data-content="Popover Content"> <svg
+                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-card-moving"
+                                    viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                                        d="M8 1.5a.5.5 0 0 1 .5.5V3h2.5a.5.5 0 0 1 .306.895L8.5 7.383V11.5a.5.5 0 0 1-1 0V7.383L5.194 3.895A.5.5 0 0 1 5.5 3H8V2a.5.5 0 0 1 .5-.5zm5 2a.5.5 0 0 0-.5-.5H11v-.5a.5.5 0 0 0-.5-.5H7a.5.5 0 0 0-.5.5v.5H4.5a.5.5 0 0 0-.306.895L6.5 7.383V11.5a1.5 1.5 0 0 0 3 0V7.383l2.306-3.588A.5.5 0 0 0 11.5 3H14a.5.5 0 0 0 .5-.5zM3 13v.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V13H3z" />
+        </svg> <span data-feather="move"></span> Moving Card
+                        </a></li>
+
+                    </ul>
+
+                    <h6
+                        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span class="text-dark">Saved reports</span> <a
+                            class="link-secondary" href="#" aria-label="Add a new report">
+                            <span data-feather="plus-circle"></span>
+                        </a>
+                    </h6>
+                    <!--        <ul class="nav flex-column mb-2">
+          <li class="nav-item" th:each="savedreports : ${Savedreport}">
+            <a class="nav-link" th:text="${savedreports.savedreports}"  href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+  <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+  <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+</svg>
+              <span data-feather="file-text" ></span>
+
+            </a>
+          </li>
+          </ul>
+          </div>
+          </nav>
+           -->
+
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item"><a class="nav-link text-light" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-earmark-text"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+  <path
+                                        d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+</svg> <span data-feather="file-text"></span> Current month
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-earmark-text"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+  <path
+                                        d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+</svg> <span data-feather="file-text"></span> Last quarter
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-earmark-text"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+  <path
+                                        d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+</svg> <span data-feather="file-text"></span> Social engagement
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link text-light" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-file-earmark-text"
+                                    viewBox="0 0 16 16">
+  <path
+                                        d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5" />
+  <path
+                                        d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+</svg> <span data-feather="file-text"></span> Year-end sale
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+
+
+
+
+
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="dashboard ">
+
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3  border-bottom">
+                        <!--  <h1 class="h2">Dashboard</h1> -->
+                        <div class="content ">
+                            <button class="open-btn">Dashboard</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="card"
+                                style="background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(97, 186, 255, 1) 0%, rgba(166, 239, 253, 1) 90.1%);">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center" href="/count">Total
+                                        Orders</h5>
+                                    <p id="totalOrders" class="text-center "
+                                        style="font-size: 29px; font-weight: 700;"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card"
+                                style="background-image: linear-gradient(109.6deg, rgba(102, 203, 149, 1) 11.2%, rgba(39, 210, 175, 1) 98.7%);">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Total Users</h5>
+                                    <p id="totalUsers" class="text-center "
+                                        style="font-size: 29px; font-weight: 700;"></p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card"
+                                style="background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(255, 236, 231, 1) 0%, rgba(255, 143, 108, 1) 90.1%);">
+                                <div class="card-body">
+                                    <h5 class="card-title text-center">Sales Count</h5>
+                                    <p class=" mb-2 fw-bold text-center"
+                                        style="font-size: 29px; font-weight: 700;">
+                                        Rs.<span id="totalSales">Loading...</span>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card"
+                                style="background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(97, 186, 255, 1) 0%, rgba(166, 239, 253, 1) 90.1%);">
+                                <div class="card-body">
+                                    <h5 class="card-title">Top Selling products</h5>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Product Name</th>
+                                                <th>Total Quantity Sold</th>
+                                                <th>Total Amount Sold</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="topSellingProductsBody">
+
+                                            <table>
+                                                <!--   <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Total Quantity</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${topSellingProducts}">
+                <td th:text="${product[0]}"></td>
+                <td th:text="${product[1]}"></td>
+                <td th:text="${product[2]}"></td>
+            </tr>
+            -->
+                                                <!-- JavaScript will populate this table -->
+                                                </tbody>
+                                            </table>
+
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <div class="container bg-dark">
+
+
+                                                <script
+                                                    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+                                                    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+                                                    crossorigin="anonymous"></script>
+
+
+                                                <center>
+                                                    <div class="popup">
+                                                        <div class="alert  alert-dismissible fade show w-50"
+                                                            style="background: #329cb4;" role="alert"
+                                                            th:each="image:${image}">
+                                                            <strong><h3>Welcome To MyMart</h3></strong> <br> <a
+                                                                th:href="@{/deletepopupimage(id=${image.id})}"
+                                                                class="btn btn-secondary text-light text-decoration-none">Delete</a>
+
+
+                                                            <center>
+                                                                <span class="showpopuplogo" href="/displaypopup">
+                                                                    <a class="btn" th:href="@{/editpopup(id=${image.id})}"><img
+                                                                        th:src="@{'/images/'+${image.popupimage}}"
+                                                                        style="width: 50%; height: 50%; background: transparent;"
+                                                                        alt="..."></a>
+                                                                </span>
+                                                            </center>
+
+
+
+
+                                                            <main>
+                                                                <div id="popupContainer" class="popup-container">
+                                                                    <div class="popup1">
+
+                                                                        <div class="discount">
+                                                                            <div class="description">
+                                                                                <i><h2 style="color: green;"
+                                                                                        th:text="${image.popupdata}"></h2></i>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="discount">
+                                                                            <div class="description">
+                                                                                <i style="color: yellow;"
+                                                                                    th:text="${image.popupofferdata}"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </main>
+
+                                                            <marquee
+                                                                style="background: transparent; color: red; height: 35px; padding: 2px; text-align: center;">
+                                                                <div class="discount">
+                                                                    <div class="description">
+                                                                        <b><i th:text="${image.popupmarqueedata}"></i></b>
+                                                                    </div>
+                                                                </div>
+                                                            </marquee>
+
+
+
+                                                            <button type="button " class="btn-close"
+                                                                data-dismiss="alert" aria-label="Close"></button>
+                                                        </div>
+                                                    </div>
+                                                </center>
+                                            </div>
+
+
+
+
+
+
+
+
+<!--                                             <div class=" movingcardscontainer">
+                                                 <h1 class="text-center my-4 bg-info">Corousel Images </h1>
+
+                                                <div id="carouselExampleControls" class="carousel slide"
+                                                    data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        <div th:each="card, iterStat : ${card}"
+                                                            class="carousel-item"
+                                                            th:classappend="${iterStat.index == 0} ? 'active'">
+                                                            <div class="row">
+                                                                <div class="col">
+
+
+                                                                    <center>
+                                                                        <table>
+                                                                            <tr>
+
+                                                                                <td>
+
+                                                                                    <div class="card-container">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4 card-side"
+                                                                                                th:each="cards:${card}">
+                                                                                                <div class="card border-success mb-3"
+                                                                                                    style="max-width: 24rem; background-image: linear-gradient(#2193b0, #6dd5ed, #06beb6, #48b1bf); background-repeat: no-repeat;">
+                                                                                                    <div
+                                                                                                        class="card-header bg-transparent border-success">
+
+                                                                                                        <center>
+                                                                                                            <img th:src="@{'/images/' + *{card.image1}}"
+                                                                                                                alt="..." height="100px" width="100px">
+                                                                                                        </center>
+
+                                                                                                    </div>
+                                                                                                    <div class="card-body ">
+                                                                                                        <div class="card-text">
+                                                                                                            <b>Name :</b> <span th:text="*{card.name1}"></span>
+                                                                                                        </div>
+
+                                                                                                        <div class="card-text">
+                                                                                                            <b>brand :</b> <span class="card-text"
+                                                                                                                th:text="*{card.brand1}"></span>
+                                                                                                        </div>
+
+                                                                                                        <div class="card-text">
+                                                                                                            <b> Price :</b> <span class="card-text"
+                                                                                                                th:text="*{card.price1}"></span>
+                                                                                                        </div>
+
+
+                                                                                                        <div class="card-text">
+                                                                                                            <b> Description :</b> <span class="card-text"
+                                                                                                                th:text="*{card.description1}"></span>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                    <div class="card-footer ">
+                                                                                                        <a class=" btn btn-primary " href="#">Edit</a>
+                                                                                                        <a class=" btn btn-danger "
+                                                                                                            th:href="@{/delete(id=${cards.id})}"
+                                                                                                            onclick="return confirm('Are You sure...?')">Delete</a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                </td>
+                                                                                <td>
+
+
+                                                                                    <div class="col-md-4 card-center"
+                                                                                        th:each="cards:${card}">
+                                                                                        <div class="card border-success mb-3"
+                                                                                            style="max-width: 15rem; background-image: linear-gradient(#2193b0, #6dd5ed, #06beb6, #48b1bf); background-repeat: no-repeat;">
+                                                                                            <div
+                                                                                                class="card-header bg-transparent border-success">
+
+                                                                                                <center>
+                                                                                                    <img th:src="@{'/images/' + *{card.image2}}"
+                                                                                                        alt="..." height="100px" width="100px">
+                                                                                                </center>
+
+                                                                                            </div>
+                                                                                            <div class="card-body ">
+                                                                                                <div class="card-text">
+                                                                                                    <b>Name :</b> <span th:text="*{card.name2}"></span>
+                                                                                                </div>
+
+                                                                                                <div class="card-text">
+                                                                                                    <b>brand :</b> <span class="card-text"
+                                                                                                        th:text="*{card.brand2}"></span>
+                                                                                                </div>
+
+                                                                                                <div class="card-text">
+                                                                                                    <b> Price :</b> <span class="card-text"
+                                                                                                        th:text="*{card.price2}"></span>
+                                                                                                </div>
+
+
+                                                                                                <div class="card-text">
+                                                                                                    <b> Description :</b> <span class="card-text"
+                                                                                                        th:text="*{card.description2}"></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="card-footer ">
+                                                                                                <a class=" btn btn-primary " href="#">Edit</a> <a
+                                                                                                    class=" btn btn-danger " href="#">Delete</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </td>
+                                                                                Cards ------------------------------------------------------
+                                                                                <td>
+
+
+                                                                                    <div class="col-md-4 card-side"
+                                                                                        th:each="cards:${card}">
+                                                                                        <div class="card border-success mb-3"
+                                                                                            style="max-width: 24rem; background-image: linear-gradient(#2193b0, #6dd5ed, #06beb6, #48b1bf); background-repeat: no-repeat;">
+                                                                                            <div
+                                                                                                class="card-header bg-transparent border-success">
+
+                                                                                                <center>
+                                                                                                    <img th:src="@{'/images/' + *{card.image3}}"
+                                                                                                        alt="..." height="100px" width="100px">
+                                                                                                </center>
+
+                                                                                            </div>
+                                                                                            <div class="card-body ">
+                                                                                                <div class="card-text">
+                                                                                                    <b>Name :</b> <span th:text="*{card.name3}"></span>
+                                                                                                </div>
+
+                                                                                                <div class="card-text">
+                                                                                                    <b>brand :</b> <span class="card-text"
+                                                                                                        th:text="*{card.brand3}"></span>
+                                                                                                </div>
+
+                                                                                                <div class="card-text">
+                                                                                                    <b> Price :</b> <span class="card-text"
+                                                                                                        th:text="*{card.price3}"></span>
+                                                                                                </div>
+
+
+                                                                                                <div class="card-text">
+                                                                                                    <b> Description :</b> <span class="card-text"
+                                                                                                        th:text="*{card.description3}"></span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="card-footer ">
+                                                                                                <a class=" btn btn-primary " href="#">Edit</a> <a
+                                                                                                    class=" btn btn-danger " href="#">Delete</a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </center>
+                                                                </div>
+                                                            </div>
+                                                            <br> <br>
+
+                                                        </div>
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button"
+                                                        data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button"
+                                                        data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            </div> -->
+
+                                            <h2>Top selling products</h2>
+                                            <table>
+                                                <tr>
+                                                    <th>Product Name</th>
+                                                    <th>Brand</th>
+                                                    <th>Total Quantity Sold</th>
+                                                    <th>Order Total Amount</th>
+                                                    <th>Order Status</th>
+                                                    <th>Order Details</th>
+                                                </tr>
+                                                <tr th:each="productData : ${topProducts}">
+                                                    <td th:text="${productData[0].name}"></td>
+                                                    <td th:text="${productData[0].brand}"></td>
+                                                    <td th:text="${productData[1]}"></td>
+                                                    <td th:text="${productData[2]}"></td>
+                                                    <td th:text="${productData[3]}"></td>
+                                                    <td>
+                                                        <ul>
+                                                            <li th:each="orderItem : ${productData[4].orderItems}"
+                                                                th:text="${orderItem.product.name} + ' (Quantity: ' + ${orderItem.quantity} + ')'"></li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!--   <div class="table-responsive ">
+        <table class="table table-striped table-sm ">
+          <thead>
+            <tr>
+              <th scope="col">Product Id</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Original price</th>
+              <th scope="col">Discount percentage</th>
+              <th scope="col">Order status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1,001</td>
+              <td>Tv</td>
+              <td>20000</td>
+              <td>20%</td>
+              <td>Confirm</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+        -->
+                                            </div>
+                                            </div>
+                                            </main>
+
+                                            </div>
+                                            </div>
+
+
+
+
+
+
+
+
+                                            <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const openBtn = document.querySelector('.open-btn');
+        const closeBtn = document.querySelector('.close-btn');
+        const sidebar = document.querySelector('.sidebar');
+
+        openBtn.addEventListener('click', () => {
+            sidebar.style.left = '0';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.left = '-250px';
+        });
+
+
+    });
+    </script>
+
+
+
+
+                                            <script>
+  $(document).ready(function(){
+        // Hide all dropdown menus initially
+        $('.dropdown-menu').hide();
+
+        // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+        $('.nav-link.dropdown-toggle').hover(function(){
+            $('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+        $('.dropdown-item.dropdown-toggle').hover(function(){
+            $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // Hide dropdown menus when mouse is not hovering over any dropdown
+        $('.dropdown').mouseleave(function() {
+            $('.dropdown-menu').hide();
+        });
+    });
+
+
+
+
+</script>
+                                            <script>
+        // Fetch total orders
+        fetch('/total')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalOrders').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error fetching total orders:', error);
+            });
+    </script>
+                                            <script>
+
+
+    fetch('/count')
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('totalUsers').textContent = data;
+    })
+    .catch(error => {
+        console.error('Error fetching total orders:', error);
+    });
+        </script>
+
+                                            <script>
+        // Fetch total Sales
+        fetch('/totalsales')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalSales').textContent = data;
+            })
+            .catch(error => {
+                console.error('Error fetching total Sales:', error);
+            });
+    </script>
+
+
+                                            <script>
+        // Fetch top selling products
+        fetch('/topsellingproducts')
+            .then(response => response.json())
+            .then(data => {
+                const topSellingProductsBody = document.getElementById('topSellingProductsBody');
+                data.forEach(product => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${product[0]}</td><td>${product[1]}</td><td>${product[2]}</td>`;
+                    topSellingProductsBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching top selling products:', error);
+            });
+    </script>
+</body>
+</html>
+

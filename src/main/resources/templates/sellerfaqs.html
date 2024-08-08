@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Seller FAQ's</title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            line-height: 1.6;
+
+            margin: 20px;
+
+            padding: 0;
+
+            background: linear-gradient(to bottom, #f6f8fa, #e9ef88);
+
+
+
+        }
+
+        .container {
+
+            max-width: 1200px;
+
+            margin: 20px auto;
+
+            padding: 20px;
+
+            border-radius: 5px;
+
+            background-color:#E9F7EF;
+
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        h1 {
+
+            font-size: 32px;
+
+            color: #333;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+        }
+
+        a {
+
+            font-size: 26px;
+
+            margin-bottom: 15px;
+
+            color: blue;
+
+            cursor: pointer;
+
+        }
+
+        p {
+
+            font-size: 24px;
+
+            color: black;
+
+            margin-bottom: 15px;
+
+            display: none; /* Hide answers by default */
+
+        }
+
+        ul {
+
+            list-style-type: disc;
+
+            margin-left: 20px;
+
+        }
+
+        strong {
+
+            font-weight: bold;
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+    <div class="container">
+
+        <h1><b>Seller FAQ's (Frequently Asked Questions)</b></h1><br>
+
+
+
+        <a onclick="toggleAnswer('q1')">Which categories products are right for MyMart?</a><br><br>
+
+        <p id="q1">Products that solve problems, add convenience to life, appeal to a wide base audience, having unique features and benefits and are highly demonstrable are of interest of MyMart. The following is the list of product categories that MyMart is pursuing:<br><br>
+
+        <strong>Apparel & Accessories, Footwear & Bags, Mobiles. Tablets & Computers, Home & Kitchen, Home Line & Furniture, Jewelry & Watches, Car & Bike Accessories, Consumer Electronics, Kids & Toys, Beauty & Wellness, Sports & Fitness.</strong></p>
+
+
+
+        <a onclick="toggleAnswer('q2')">Is there a minimum quantity?</a><br><br>
+
+        <p id="q2">A minimum quantity depends upon the price and category. However, MyMart deliver products to customers in almost entire India and certain amount of product inventory is required. On the other hand, a minimum quantity for initial test phase is relatively small.</p>
+
+
+
+        <a onclick="toggleAnswer('q3')">Is there a fee or charge for submission?</a><br><br>
+
+        <p id="q3">MyMart does not charge for product evaluation.</p>
+
+
+
+        <a onclick="toggleAnswer('q4')">How can I speak directly with a merchandiser to discuss my product?</a><br><br>
+
+        <p id="q4">Considering the volume of product submissions, buyers are unable to speak directly with applicants at the outset. However, if your product is selected for further evaluation, you will be contacted by our merchandiser.</p>
+
+
+
+        <a onclick="toggleAnswer('q5')">How long will the MyMart review will take?</a><br><br>
+
+        <p id="q5">MyMart's merchandiser will contact you by email to inform you of a decision in approximately 2-3 weeks from the time your submission is received.</p>
+
+
+
+    	<a onclick="toggleAnswer('q6')">I have multiple products. Should I submit an application for each product?</a><br><br>
+
+        <p id="q6">No, MyMart prefers that you do not send any samples until we request. Upon evaluation , If MyMart requests a sample, please enclose a copy of your product submission form along with the sample . MyMart accepts no responsibility or liability for the safe the safe arrival , handling or return of any submitted materials . MyMart does not return unsolicited product. We highly recommend that you do not send any materials that can not be replaced , such as an original mold/dye or prototype.</p>
+
+
+
+        <a onclick="toggleAnswer('q7')">What cost should I keep in mind to have business with MyMart?</a><br><br>
+
+        <p id="q7">On the top of the cost of goods to MyMart. There are several costs to consider , including but not limited to :
+
+
+
+			Packaging and shipping your products to the fulfillment center
+
+			Storing your products at the fulfillment center
+
+			Required quality testing , certifications and inspections and
+
+			Supplying an on-air Expert/Guest
+
+			MyMart is unable to provide estimates on these costs</p>
+
+
+
+        <a onclick="toggleAnswer('q8')">Will MyMart help me to develop and/or manufacture my product idea?</a><br><br>
+
+        <p id="q8">As of now , MyMart only works with vendors who can supply functional products; MyMart does not assist inventors and entrepreneurs with manufacturing.</p>
+
+
+
+        <a onclick="toggleAnswer('q9')">Does my product have to be finished product?</a><br><br>
+
+        <p id="q9">The item you submit for a product evaluation should be functional product with secured manufacture.</p>
+
+
+
+         <a onclick="toggleAnswer('q10')">Will you accept the application if the required fields are not completed?</a><br><br>
+
+        <p id="q10">No, you have to fill out the mandatory fields in order to submit your application</p>
+
+
+
+         <a onclick="toggleAnswer('q11')">Can I access to MyMart's shipping and quality control requirements?</a><br><br>
+
+        <p id="q11">Once MyMart has decided to provide support for selling your product , we will provide you with access to our Quality Assurance, Packaging and Labelling Guidelines. We do not release this information until it is determined that MyMart is interested in your product.</p>
+
+
+
+
+
+
+
+    </div>
+
+
+
+    <script>
+        function toggleAnswer(id) {
+            var answer = document.getElementById(id);
+
+            // Toggle the display style directly
+            if (answer.style.display === '' || answer.style.display === 'none') {
+                answer.style.display = 'block';
+            } else {
+                answer.style.display = 'none';
+            }
+        }
+    </script>
+
+
+</body>
+
+
+
+</html>

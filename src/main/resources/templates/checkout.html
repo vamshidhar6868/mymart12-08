@@ -1,0 +1,470 @@
+
+ 
+ <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<link
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet">
+
+<style>
+body {
+    background-color: #f8f9fa; /* Light gray background */
+    color: #343a40; /* Dark gray text */
+}
+
+/* Add shadow effect to specific containers */
+.cart-container {
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary-container {
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar {
+    background-color: #ADD8E6;
+}
+
+.jumbotron {
+    background-color: #f8f9fa;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.navbar ul li a{
+ font-weight: 400;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.card-body {
+    background-color: #fff;
+}
+
+.card-body:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu {
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.dropdown-item:hover {
+    background-color: aliceblue;
+    color: black;
+}
+/* location css */
+#addressContainer {
+    display: none;
+    position: absolute;
+    top: calc(100% + 3px);
+    right: 80px;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    z-index: 999;
+}
+
+.profileDrop :hover{
+background-image: linear-gradient( 109.6deg,  rgba(62,161,219,1) 11.2%, rgba(93,52,236,1) 100.2% );
+color:white;
+}
+.first:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.second:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.third:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.fourth:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.fifth:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light sticky-top"
+        style="background-color:#003153; color: black;">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav">
+                <li class="nav-item"
+                    th:each="navbarItem : ${navbarWithDropdownData}">
+                    <div class="dropdown">
+                        <a th:if="${#lists.isEmpty(navbarItem.value)}"
+                            class="nav-link text-light"
+                            th:href="${navbarItem.key != null ? (navbarItem.key.itemName == 'Admin' ? '/Admin/' + navbarItem.key.itemName : navbarItem.key.itemName) : ''}"
+                            th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+                        <a th:if="${not #lists.isEmpty(navbarItem.value)}"
+                            class="nav-link dropdown-toggle text-light" href="#"
+                            id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"
+                            th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div th:each="dropdownItem : ${navbarItem.value}">
+                                <div class="dropdown-submenu">
+                                    <a class="dropdown-item dropdown-toggle" href="#"
+                                        th:href="${dropdownItem.itemName == 'Admin' ? '/Admin/' + dropdownItem.itemName : '/User/' + dropdownItem.itemName}"
+                                        th:text="${dropdownItem.itemName}"></a>
+                                    <div class="dropdown-menu">
+                                        <div th:each="dropChild : ${dropdownItem.dropChildren}">
+                                            <div class="dropdown-submenu">
+                                                <a class="dropdown-item dropdown-toggle" href="#"
+                                                    th:href="${dropChild.itemName == 'Admin' ? '/Admin/' + dropChild.itemName : '/User/' + dropChild.itemName}"
+                                                    th:text="${dropChild.itemName}"></a>
+                                                <div class="dropdown-menu">
+                                                    <div
+                                                        th:each="dropChildOfChild : ${dropChild.dropChildrenOfChild}">
+                                                        <div class="dropdown-submenu">
+                                                            <a class="dropdown-item dropdown-toggle" href="#"
+                                                                th:href="${dropChildOfChild.itemName == 'Admin' ? '/Admin/' + dropChildOfChild.itemName : '/User/' + dropChildOfChild.itemName}"
+                                                                th:text="${dropChildOfChild.itemName}"></a>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item"
+                                                                    th:each="grandChild : ${dropChildOfChild.grandChildren}"
+                                                                    th:href="${grandChild.itemName == 'Admin' ? '/Admin/' + grandChild.itemName : '/User/' + grandChild.itemName}"
+                                                                    th:text="${grandChild.itemName}"></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+
+
+            <!-- Search Bar  -->
+            <form class="form-inline my-2 my-lg-0" id="labnol" action="/search"
+                method="get">
+                <input class="form-control mr-sm-1" type="search" id="transcript"
+                    name="query" placeholder="Search" aria-label="Search"
+                    style="width: 220px;">
+                <svg onclick="startDictation(),play()"
+                    xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+                    fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16"
+                    style="color:white;">
+  <path
+                        d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5" />
+  <path
+                        d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3" />
+</svg>
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                <br>
+            </form>
+
+
+
+
+
+            <!-- Speech Recognition  -->
+            <script>
+  function startDictation() {
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+      var recognition = new webkitSpeechRecognition();
+
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      recognition.lang = 'en-US';
+      recognition.start();
+recognition.onresult = function (e) {
+        document.getElementById('transcript').value = e.results[0][0].transcript;
+        recognition.stop();
+        document.getElementById('labnol').submit();
+      };
+
+      recognition.onerror = function (e) {
+        recognition.stop();
+      };
+    }
+  }
+<!-- beep sound code--->
+        function play() {
+            var audio = new Audio(
+'https://media.geeksforgeeks.org/wp-content/uploads/20190531135120/beep.mp3');
+            audio.play();
+        }
+    </script>
+
+
+        </div>
+
+
+
+
+
+
+        <ul class="navbar-nav ml-4">
+            <li class="nav-item"><a class="nav-link text-light"
+                id="locationButton"><i class="fas fa-map-marker-alt"
+                    style="color: #28a745;"></i> Location</a></li>
+
+
+            <div id="addressContainer"></div>
+
+                <script>
+  document.getElementById('locationButton').addEventListener('click', function() {
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+
+
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+        .then(response => response.json())
+        .then(data => {
+          var address = data.display_name;
+          document.getElementById('addressContainer').textContent = 'Your current address: ' + address;
+          document.getElementById('addressContainer').style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching address:', error);
+        });
+    });
+  });
+</script>
+
+
+            <li class="nav-item dropdown"
+                th:if="${#authorization.expression('isAuthenticated()')}"><a
+                class="nav-link dropdown-toggle text-light" href="#"
+                id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"> <i
+                    class="fas fa-user-circle fa-lg" style="color: #007bff;"></i> <span
+                    th:text="${#authentication.principal.name}"></span>
+            </a>
+                <div class="dropdown-menu profileDrop"
+                    aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item first"
+                        th:href="@{/profiles(name=${#authentication.principal.name})}"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-person-circle"
+                            viewBox="0 0 16 16"><path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" /><path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                            </svg>&nbsp My Profile</a>
+
+                    <a class="dropdown-item second" href="/wishlist/view"><svg
+                          xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd"d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314" />
+                          </svg>&nbsp Wishlist</a>
+
+                    <a class="dropdown-item third" href="/cart"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16"><path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
+                            </svg>&nbsp Cart</a>
+
+                     <a class="dropdown-item fourth" href="/orders"> <svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-box-seam-fill"
+                            viewBox="0 0 16 16"> <path fill-rule="evenodd"
+                           d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+                          </svg>&nbsp My Orders</a>
+                     <a class="dropdown-item fifth" href="/logout"> <svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="currentColor" class="bi bi-box-arrow-right"
+                            viewBox="0 0 16 16"> <path fill-rule="evenodd"    d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                            <path fill-rule="evenodd"
+                                d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+                           </svg> &nbsp Logout</a>
+                </div></li>
+
+            <li class="nav-item"
+                th:unless="${#authorization.expression('isAuthenticated()')}">
+
+                <a class="nav-link text-light" href="/login/profile/" role="button"
+                aria-haspopup="true" aria-expanded="false"> <i
+                    class="fas fa-user-circle fa-lg" style="color: #007bff;"></i> Login
+            </a>
+            <li class="nav-item"><a class="nav-link text-light" href="/cart"><i
+                    class="fas fa-shopping-cart fa-lg" style="color: red"></i> Cart</a></li>
+
+
+
+            <li class="nav-item"
+                th:if="${#authorization.expression('isAuthenticated()')}"><a
+                class="nav-link text-light" th:href="@{/logout}"> <i
+                    class="fas fa-sign-out-alt fa-lg" style="color: #007bff;"></i>
+                    Logout
+            </a></li>
+        </ul>
+        </div>
+    </nav>
+<h1 class="text-center text-danger"><strong><u>Checkout</u></strong></h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+
+            <form id="msform" action="/checkout" method="post">
+                <input type="hidden" name="${_csrf.parameterName}"
+                    value="${_csrf.token}" />
+
+                <!-- Your Cart Container -->
+                <div class="cart-container">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary" ><u>Your Cart</u></h4>
+                            <ul class="list-group">
+                                <th:block th:each="cartItem : ${cartItems}">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <img th:src="@{'/images/' + ${cartItem.product.imageFileName}}" class="img-fluid" alt="Product Image">
+                                            </div>
+                                            <div class="col-9">
+                                                <b><h5 class="card-subtitle mb-2" th:text="${cartItem.product.name}"></h5></b>
+                                                <p class="card-text">
+                                                    Brand: <span th:text="${cartItem.product.brand}"></span><br>
+                                                    <!-- Price: $<span th:text="${cartItem.product.price}"></span><br> -->
+                                                    <p class="card-text">
+                                                        <!-- Check if the product has a deal -->
+                                                        <span th:if="${cartItem.product.deal != null}">
+                                                            Discounted Price: $<span th:text="${cartItem.product.discountedPrice}"></span>
+                                                        </span>
+                                                        <!-- If the product does not have a deal, display the original price -->
+                                                        <span th:unless="${cartItem.product.deal != null}">
+                                                            Price: $<span th:text="${cartItem.product.price}"></span>
+                                                        </span>
+                                                    </p>
+                                                    Quantity: <span th:text="${cartItem.quantity}"></span> Qty
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </th:block>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <!-- Order Summary Container -->
+            <div class="order-summary-container">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-primary"><u>Order Summary</u></h4>
+                        <h6>Subtotal: <span th:text="${subtotal}"></span></h6>
+                        <h6>Shipping Charges: <span th:text="${shipping}"></span></h6>
+                        <h6 class="text-danger">Total Amount: <span th:text="${total}" class="text-success"></span></h6>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h3>Select Shipping Address</h3>
+            <form id="msform" action="/payment" method="get">
+                <div class="address-box">
+                    <th:block th:each="address : ${addresses}">
+                        <label> <input type="radio" name="addressId" th:value="${address.id}" required> <b> <span th:text="${address.name + ' - ' + address.mobile}"></span></b> <br>
+                            <span th:text="${address.addressLine1 + ', ' + address.city + ', ' + address.state + ', ' + address.country +', ' +address.zipCode}"></span>
+                        </label>
+                        <a th:href="@{'/editAddress/' + ${address.id}}"> <i class="fas fa-edit"></i></a>
+                        <a th:href="@{'/deleteAddress/' + ${address.id}}" style="color: red;"> <i class="fas fa-trash-alt"></i></a>
+                        <br><br>
+                    </th:block>
+                </div>
+                <a href="/addAddress" class="btn btn-primary btn-block">Add New Address</a>
+                <button type="submit" class="btn btn-block mt-3" style="background-color:#FF4500;">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+        // Hide all dropdown menus initially
+        $('.dropdown-menu').hide();
+
+        // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+        $('.nav-link.dropdown-toggle').hover(function(){
+            $('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+        $('.dropdown-item.dropdown-toggle').hover(function(){
+            $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // Hide dropdown menus when mouse is not hovering over any dropdown
+        $('.dropdown').mouseleave(function() {
+            $('.dropdown-menu').hide();
+        });
+    });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

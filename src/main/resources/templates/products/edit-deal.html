@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Deal</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Deal</h1>
+         <form th:action="@{/deals/editProductDeal/{dealId}(dealId=${deal.id})}" th:object="${deal}" method="post">
+            
+
+
+            <div class="form-group">
+                <label for="name">Deal Name:</label>
+                <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Deal Name" required />
+            </div>
+           
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" th:field="*{startDate}" class="form-control" id="startDate" required />
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" th:field="*{endDate}" class="form-control" id="endDate" required />
+            </div>
+            <div class="form-group">
+                <label for="discount">Discount (%):</label>
+                <input type="number" th:field="*{discount}" class="form-control" id="discount" placeholder="Discount %" required />
+            </div>
+
+            <div class="form-group">
+                <label for="product">Product:</label>
+                <select th:field="*{product.id}" class="form-control" id="product" required>
+                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}">Product</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Deal</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

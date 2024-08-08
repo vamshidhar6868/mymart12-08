@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+
+  /*DropDown list css */
+
+     .navbar-custom {
+            background-color: #515d69;
+        }
+        .navbar-custom .nav-link {
+            color: #fff;
+        }
+        .navbar-custom .dropdown-menu {
+            background-color: #30612f;
+
+
+        }
+        .navbar-custom .dropdown-item {
+            color: #fff;
+        }
+        .navbar-custom .dropdown-item:hover {
+            background-color: #d4cf9d;
+            border-left:5px solid orange;
+            border-right:5px solid orange;
+        }
+
+
+
+
+
+        .dropdown-toggle::after {
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+.dropdown:hover .dropdown-toggle::after {
+  transform: rotate(180deg);
+}
+
+.dropdown-submenu.dropdown-toggle::after {
+  transform: rotate(0deg);
+  transition: transform 0.5s;
+}
+
+.dropdown-submenu:hover .dropdown-toggle::after {
+  transform: rotate(270deg);
+}
+
+
+
+
+
+
+
+
+
+
+    .profileDrop :hover{
+background-image: linear-gradient(90deg, #FDC830,#F37335);
+color:white;
+}
+
+    .first:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.second:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.third:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.fourth:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+.fifth:hover svg {
+  transform: rotate(360deg);
+  transition: transform 0.59s ease;
+}
+
+
+    /* location css */
+
+#addressContainer {
+    display: none;
+    position: absolute;
+    top: calc(100% + 3px);
+    right: 80px;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    z-index: 999;
+}
+
+
+
+
+
+
+   .navbar {
+  background-color: #ADD8E6;
+}
+
+.jumbotron {
+  background-color: #f8f9fa;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.card-body {
+  background-color: #fff;
+}
+
+.card-body:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-item {
+  position: relative;
+  margin-right: 10px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}
+
+
+
+
+
+
+.dropdown-submenu {
+  position: relative;
+  padding-bottom: 15px;
+
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+
+}
+
+.dropdown-item:hover {
+  background-color: skyblue;
+  color: black;
+   display: inline-block;
+    transition: transform 0.3s ease-in-out;
+}
+/* location css */
+
+#addressContainer {
+    display: none;
+    position: absolute;
+    top: calc(100% + 3px);
+    right: 80px;
+    width: 200px;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    z-index: 999;
+}
+
+    </style>
+
+<script>
+  $(document).ready(function(){
+        // Hide all dropdown menus initially
+        $('.dropdown-menu').hide();
+
+        // When hovering over a nav-link dropdown-toggle, show its dropdown-menu and hide others
+        $('.nav-link.dropdown-toggle').hover(function(){
+            $('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // When hovering over a dropdown-item dropdown-toggle, show its dropdown-menu and hide others
+        $('.dropdown-item.dropdown-toggle').hover(function(){
+            $(this).closest('.dropdown-menu').find('.dropdown-menu').hide();
+            $(this).next('.dropdown-menu').show();
+        });
+
+        // Hide dropdown menus when mouse is not hovering over any dropdown
+        $('.dropdown').mouseleave(function() {
+            $('.dropdown-menu').hide();
+        });
+    });
+
+</script>
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom sticky-top" style="background-image: linear-gradient(90deg, #006241,#1DB954);color: black;">
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+<ul class="navbar-nav">
+
+    <li class="nav-item" th:each="navbarItem : ${navbarWithDropdownData}">
+
+        <div class="dropdown">
+
+            <a th:if="${#lists.isEmpty(navbarItem.value)}"
+
+               class="nav-link text-light"
+
+               th:href="${navbarItem.key != null ? '/Admin/' + navbarItem.key.itemName : ''}"
+
+               th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+
+
+            <a th:if="${not #lists.isEmpty(navbarItem.value)}"
+
+               class="nav-link dropdown-toggle text-light"
+
+               href="#"
+
+               id="navbarDropdown"
+
+               role="button"
+
+               data-toggle="dropdown"
+
+               aria-haspopup="true"
+
+               aria-expanded="false"
+
+               th:text="${navbarItem.key != null ? navbarItem.key.itemName : ''}"></a>
+
+
+
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                <div th:each="dropdownItem : ${navbarItem.value}">
+
+                    <div class="dropdown-submenu">
+
+                        <a class="dropdown-item dropdown-toggle" href="#" th:href="${dropdownItem.itemName == 'Admin' ? '/Admin/' + dropdownItem.itemName : '/Admin/' + dropdownItem.itemName}" th:text="${dropdownItem.itemName}"></a>
+
+                        <div class="dropdown-menu">
+
+                            <div th:each="dropChild : ${dropdownItem.dropChildren}">
+
+                                <div class="dropdown-submenu">
+
+                                    <a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChild.itemName == 'Admin' ? '/Admin/' + dropChild.itemName : '/Admin/' + dropChild.itemName}" th:text="${dropChild.itemName}"></a>
+
+                                    <div class="dropdown-menu">
+
+                                        <div th:each="dropChildOfChild : ${dropChild.dropChildrenOfChild}">
+
+                                            <div class="dropdown-submenu">
+
+                                                <a class="dropdown-item dropdown-toggle" href="#" th:href="${dropChildOfChild.itemName == 'Admin' ? '/Admin/' + dropChildOfChild.itemName : '/Admin/' + dropChildOfChild.itemName}" th:text="${dropChildOfChild.itemName}"></a>
+
+                                                <div class="dropdown-menu">
+
+                                                    <a class="dropdown-item" th:each="grandChild : ${dropChildOfChild.grandChildren}" th:href="${grandChild.itemName == 'Admin' ? '/Admin/' + grandChild.itemName : '/Admin/' + grandChild.itemName}" th:text="${grandChild.itemName}"></a>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </li>
+
+</ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" style="width: 430px;">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ml-4">
+               <li class="nav-item">
+        <a th:href="@{/Admin/Navbar}" class="btn btn-primary text-light text-decoration-none">Navbar</a>
+</li>
+               <li class="nav-item">
+
+    <span sec:authorize="isAuthenticated">
+
+        <a th:href="@{/logout}" class="btn btn-outline-light text-light text-decoration-none">Logout</a>
+
+    </span>
+
+</li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+
+
+<div>
+     <a th:href="@{deals/addProductDeal}" class="btn btn-warning text-dark text-decoration-none">Add Deals on product</a>
+
+    </div>
+
+         <div class="container">
+        <div class="container">
+
+            <div class="container mt-5">
+
+                <div class="row">
+                    <div class="col-md-4" th:each="product : ${products}">
+                        <div class="card deal-card position-relative" style="padding: 0px 13px 10px 13px;">
+                            <!-- Your existing code for product display -->
+                            <div class="container">
+                                <!-- Display product information here -->
+                                <img th:src="@{'/images/' + ${product.imageFileName}}" class="card-img-top mb-3" alt="Product Image" style="z-index: 1; margin-top: -6px;">
+                                <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white px-2 py-1" th:if="${product.deal != null}" th:text="' ' + ${product.deal.discount + '% OFF'}" style="z-index: 2; right: 7px; top: 5px;">10% OFF</div>
+                                <h5 class="card-title mb-1" th:text="${product.name}"></h5>
+                                <p class="brand-name text-uppercase text-muted mb-2" th:text="${product.brand}" style="font-size: 14px;"></p>
+                                <p class="card-text mb-3" th:text="${product.description}"></p>
+                                <div class="price-info" style="margin-bottom: -10px;">
+                                    <p th:if="${product.deal != null}" style="display: inline-block;">
+                                        <span class="discounted-price font-weight-bold" th:text="'$' + ${product.price - (product.price * product.deal.discount / 100)}"></span>
+                                        <span class="original-price" th:text="'$' + ${product.price}" style="text-decoration: line-through; color: #888; margin-left: 5px;"></span>
+                                    </p>
+                                    <p class="price font-weight-bold" th:unless="${product.deal != null}" th:text="'Price: $' + ${product.price}" style="display: inline-block;"></p>
+                                </div>
+                            </div>
+                            <!-- Edit and Delete buttons for deals -->
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                 <a th:if="${product.deal != null}" th:href="@{/deals/editProductDeal/{dealId}(dealId=${product.deal.id})}" class="btn btn-primary btn-sm">Edit Deal</a>
+                        <form th:if="${product.deal != null}" th:action="@{/deals/delete/{id}(id=${product.deal.id})}" method="post">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete Deal</button>
+                        </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+
+           </div>
+
+        </div>
+
+    </div>
+</div>
+
+  </div>
+</div>
+  </div>
+</div>
+
+</body>
+</html>
+

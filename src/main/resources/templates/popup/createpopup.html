@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Mart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+ 
+<div class="container">
+  
+<div class="col-md-8 mx-auto rounded border p-4 m-4"> 
+<h2 class="text-center mb-5 bg-success">New Images</h2>
+<form method="post" enctype="multipart/form-data" th:object="${popupDto}">
+   
+<div class="row mb-3">
+<label class="col-sm-4 col-form-Label">OfferData</label>
+<div class="col-sm-8">
+<textarea class="form-control" th:field="${popupDto.popupdata}"></textarea>
+ <p th:if="${#fields.hasErrors('popupdata')}" th:errorclass="text-danger" th:errors="${popupDto.popupdata}"></p>
+</div>
+</div>
+
+
+<div class="row mb-3">
+<label class="col-sm-4 col-form-label">Image1</label>
+<div class="col-sm-8">
+<input class="form-control"  type="file" th:field="${popupDto.popupimage}">
+ <p th:if="${#fields.hasErrors('popupimage')}" th:errorclass="text-danger" th:errors="${popupDto.popupimage}"></p>
+</div>
+</div>
+
+<div class="row mb-3">
+<label class="col-sm-4 col-form-Label">popupdata</label>
+<div class="col-sm-8">
+<textarea  class="form-control" th:field="${popupDto.popupofferdata}"></textarea>
+ <p th:if="${#fields.hasErrors('popupofferdata')}" th:errorclass="text-danger" th:errors="${popupDto.popupofferdata}"></p>
+</div>
+</div>
+
+
+<div class="row mb-3">
+<label class="col-sm-4 col-form-Label">popupmarqueedata</label>
+<div class="col-sm-8">
+<textarea  class="form-control" th:field="${popupDto.popupmarqueedata}"></textarea>
+ <p th:if="${#fields.hasErrors('popupmarqueedata')}" th:errorclass="text-danger" th:errors="${popupDto.popupmarqueedata}"></p>
+</div>
+</div>
+
+
+<div class="row">
+<div class="offset-sm-4 col-sm-4 d-grid">
+<button type="sumbit" class="btn btn-primary">submit</button>
+</div>
+<div class="col-sm-4 d-grid">
+<a class="btn btn-outline-primary" href="/admin-page" role="button">cancel</a>
+</div>
+</div>
+
+</form>
+</div>
+
+</div>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  </body>
+</html>
